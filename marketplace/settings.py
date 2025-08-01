@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-*!fc60jqmx2^queogk5&zxub6%+lx)$o*ua&_4ij@c56=pl+!@
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://summerclass-sppv.onrender.com',
+    'summerclass-sppv.onrender.com',
     '127.0.0.1',
     'localhost',
 ]
