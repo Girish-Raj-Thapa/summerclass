@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     'summerclass-sppv.onrender.com',
     '127.0.0.1',
     'localhost',
-    'www.girishrajthapa.com.np'
+    'girishrajthapa.com.np',
 ]
 
 
