@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'girishrajthapa.com.np',
-    'www.girishrajthapa.com.np'
 ]
 
 
