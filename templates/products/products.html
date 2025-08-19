@@ -1,34 +1,193 @@
-{% extends 'master/base.html' %}
-{% load static %}
-{% block content %}
-<h2 class="mb-4">All Products</h2>
-<div class="row">
-  {% for product in products %}
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <div class="card-body">
-          {% if product.product_image %}
-            <a href="{% url 'product_detail' product.pk %}">
-              <img 
-                src="{{ product.product_image.url }}"
-                class="card-img-top"
-                alt="{{ product.name }}"
-                width="100%" height="300px" style="object-fit:cover;"
-              />
-            </a>
-          {% else %}
-            <img 
-              src="{% static 'images/default.jpg' %}"
-              class="card-img-top"
-              alt="No image available"
-            />
-          {% endif %}
-              <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">Rs. {{ product.price }}</p>
-          <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">Details</a>
-        </div>
-      </div>
+{% extends 'master/base.html' %} 
+{% load static %} 
+{% block content %}   
+ 
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop">
+  <div class="container">
+    <div class="pagetop-content">
+      <h1 class="page-title">Our Store</h1>
+      <p class="page-subtitle">Discover premium products crafted for excellence</p>
     </div>
-  {% endfor %}
-</div>
+  </div>
+</section>
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Sidebar Filters -->
+      <aside class="col-lg-3">
+        <div class="filters-container">
+          <!-- Categories Filter -->
+          <div class="filter-card">
+            <div class="filter-header" data-bs-toggle="collapse" data-bs-target="#categoriesFilter">
+              <h6 class="filter-title">
+                <i class="fas fa-layer-group me-2"></i>
+                Categories
+              </h6>
+              <i class="fas fa-chevron-down filter-arrow"></i>
+            </div>
+            <div class="collapse show" id="categoriesFilter">
+              <div class="filter-body">
+                <ul class="category-list">
+                  {% for category in categories %}
+                  <li class="category-item">
+                    <a href="{% url 'products_by_category' category.slug %}" class="category-link">
+                      {{ category.name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sizes Filter -->
+          <div class="filter-card">
+            <div class="filter-header" data-bs-toggle="collapse" data-bs-target="#sizesFilter">
+              <h6 class="filter-title">
+                <i class="fas fa-ruler me-2"></i>
+                Sizes
+              </h6>
+              <i class="fas fa-chevron-down filter-arrow"></i>
+            </div>
+            <div class="collapse show" id="sizesFilter">
+              <div class="filter-body">
+                <div class="size-options">
+                  <label class="size-option">
+                    <input type="checkbox" />
+                    <span class="size-btn">XS</span>
+                  </label>
+                  <label class="size-option">
+                    <input type="checkbox" />
+                    <span class="size-btn">SM</span>
+                  </label>
+                  <label class="size-option">
+                    <input type="checkbox" />
+                    <span class="size-btn">LG</span>
+                  </label>
+                  <label class="size-option">
+                    <input type="checkbox" />
+                    <span class="size-btn">XXL</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-card">
+            <div class="filter-header" data-bs-toggle="collapse" data-bs-target="#priceFilter">
+              <h6 class="filter-title">
+                <i class="fas fa-dollar-sign me-2"></i>
+                Price Range
+              </h6>
+              <i class="fas fa-chevron-down filter-arrow"></i>
+            </div>
+            <div class="collapse show" id="priceFilter">
+              <div class="filter-body">
+                <div class="price-range">
+                  <div class="price-group">
+                    <label class="price-label">Min</label>
+                    <select class="price-select">
+                      <option value="0">$0</option>
+                      <option value="50">$50</option>
+                      <option value="100">$100</option>
+                      <option value="150">$150</option>
+                      <option value="200">$200</option>
+                      <option value="500">$500</option>
+                      <option value="1000">$1000</option>
+                    </select>
+                  </div>
+                  <div class="price-group">
+                    <label class="price-label">Max</label>
+                    <select class="price-select">
+                      <option value="50">$50</option>
+                      <option value="100">$100</option>
+                      <option value="150">$150</option>
+                      <option value="200">$200</option>
+                      <option value="500">$500</option>
+                      <option value="1000">$1000</option>
+                      <option value="2000">$2000+</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn-apply-filter">
+                  <i class="fas fa-filter me-2"></i>
+                  Apply Filter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="col-lg-9">
+        <!-- Results Header -->
+        <div class="results-header">
+          <div class="results-info">
+            <h5 class="results-count">{{ product_count }} items found</h5>
+            <p class="results-text">Showing premium products</p>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+          {% for product in products %}
+          <div class="product-card-wrapper">
+            <div class="product-card">
+              <div class="product-image-container">
+                {% if product.product_image %}
+                <a href="{{ product.get_url }}" class="product-image-link">
+                  <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="product-image" />
+                </a>
+                {% else %}
+                <div class="no-image">
+                  <i class="fas fa-image"></i>
+                  <span>No Image</span>
+                </div>
+                {% endif %}
+                
+                {% if product.stock <= 5 %}
+                <div class="stock-badge low-stock">
+                  <i class="fas fa-exclamation-triangle me-1"></i>
+                  Only {{ product.stock }} left!
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="product-info">
+                <h6 class="product-title">
+                  <a href="{{ product.get_url }}">{{ product.name }}</a>
+                </h6>
+
+                <div class="product-price">
+                  <span class="current-price">Rs.{{ product.price }}</span>
+                  <span class="old-price">Rs.{{ product.price }}</span>
+                </div>
+
+                <div class="product-actions">
+                  <a href="{{ product.get_url }}" class="btn-view-details">
+                    <i class="fas fa-info-circle me-2"></i>
+                    View Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+          {% include 'products/includes/pagination.html' %}
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+ 
 {% endblock %}

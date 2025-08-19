@@ -1,0 +1,85 @@
+{% extends 'master/base.html' %} 
+{% load static %} 
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+  <div class="container">
+    <div class="row">
+      {% include 'accounts/includes/sidebar.html' %} 
+      <main class="col-md-9">
+        <article class="dashboard-main-card">
+          <header class="dashboard-header">
+            <strong class="d-inline-block mr-3">Logged in as:</strong>
+            <span class="user-name">Mohit Paudel</span>
+          </header>
+          <div class="dashboard-body">
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="dashboard-stat-card">
+                  <div class="stat-card-body">
+                    <div class="stat-icon">
+                      <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <h5 class="stat-title">Total Orders</h5>
+                    <h4 class="stat-number">5</h4>
+                    <a href="{% url 'my_orders' %}" class="stat-link"
+                      >View Orders</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="dashboard-stat-card">
+                  <div class="stat-card-body">
+                    <div class="stat-icon">
+                      <i class="fa fa-inbox"></i>
+                    </div>
+                    <h5 class="stat-title">Requests Received</h5>
+                    <h4 class="stat-number">10</h4>
+                    <a href="{% url 'my_requests_received' %}" class="stat-link"
+                      >View Requests</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="dashboard-stat-card">
+                  <div class="stat-card-body">
+                    <div class="stat-icon">
+                      <i class="fa fa-box"></i>
+                    </div>
+                    <h5 class="stat-title">My Products</h5>
+                    <h4 class="stat-number">8</h4>
+                    <a href="{% url 'my_products' %}" class="stat-link"
+                      >Manage Products</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="dashboard-stat-card">
+                  <div class="stat-card-body">
+                    <div class="stat-icon">
+                      <i class="fa fa-paper-plane"></i>
+                    </div>
+                    <h5 class="stat-title">Requests Sent</h5>
+                    <h4 class="stat-number">3</h4>
+                    <a href="{% url 'my_request_sent' %}" class="stat-link"
+                      >View Sent</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- row.// -->
+          </div>
+          <!-- dashboard-body .// -->
+        </article>
+        <!-- dashboard-main-card.// -->
+      </main>
+    </div>
+    <!-- row.// -->
+  </div>
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

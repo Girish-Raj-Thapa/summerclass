@@ -1,0 +1,20 @@
+[
+{
+  "model": "carts.cart",
+  "pk": 1,
+  "fields": {
+    "cart_id": "ki0yuad8l3qm1s3ri6hc4j0tqmmuu6fw",
+    "date_added": "2025-08-15"
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 6,
+  "fields": {
+    "product": 1,
+    "cart": 1,
+    "quantity": 1,
+    "is_active": true
+  }
+}
+]

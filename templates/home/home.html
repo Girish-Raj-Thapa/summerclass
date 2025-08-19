@@ -1,57 +1,134 @@
-{% extends 'master/base.html' %}
-{% load static %}
+{% extends 'master/base.html' %} 
+{% load static %} 
 {% block content %}
-<h2 class="mb-4">Featured Products</h2>
-<div class="row">
-  {% for product in products %}
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        {% if product.product_image %}
-        <a href="{% url 'product_detail' product.pk %}">
-          <img 
-            src="{{ product.product_image.url }}"
-            class="card-img-top"
-            alt="{{ product.name }}"
-          />
-        </a>
-        {% else %}
-        <img 
-          src="{% static 'images/default.jpg' %}"
-          class="card-img-top"
-          alt="No image available"
-        />
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">Rs. {{ product.price }}</p>
-          <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">View</a>
-        </div>
-      </div>
+
+<!-- ========================= ALERT MESSAGES ========================= -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   {% endfor %}
-</div>
+{% endif %}
 
-<h2 class="mt-5 mb-4">Latest Blogs</h2>
-<div class="list-group">
-  {% for blog in blogs %}
-    {% if blog.blog_image %}
-        <a href="{% url 'blog_detail' blog.pk %}">
-          <img 
-            src="{{ blog.blog_image.url }}"
-            class="card-img-top"
-            alt="{{ blog.title }}"
-          />
-        </a>
-        {% else %}
-        <img 
-          src="{% static 'images/default.jpg' %}"
-          class="card-img-top"
-          alt="No image available"
-        />
-        {% endif %}
-    <a href="{% url 'blog_detail' blog.pk %}" class="list-group-item list-group-item-action">
-      {{ blog.title }}
-    </a>
-  {% endfor %}
-</div>
+<!-- ========================= ALERT MESSAGES END ========================= -->
+
+<!-- ========================= BANNER SECTION ========================= -->
+<section class="homepage-banner-section">
+    <div class="container">
+        <div id="bannerCarousel" class="carousel slide homepage-carousel" data-bs-ride="carousel" data-bs-interval="4000">
+            <div class="carousel-inner">
+                {% for banner in banners %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <a href="{{ banner.link|default:'#' }}" class="homepage-banner-link">
+                        <img src="{{ banner.image.url }}"
+                             class="d-block w-100 homepage-banner-image"
+                             alt="{{ banner.title|default:'Banner' }}">
+                    </a>
+                </div>
+                {% empty %}
+                <div class="carousel-item active">
+                    <img src="{% static 'images/default.jpg' %}"
+                         class="d-block w-100 homepage-banner-image"
+                         alt="Default Banner">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev homepage-carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next homepage-carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= PRODUCTS SECTION ========================= -->
+<section class="homepage-products-section">
+    <div class="container">
+        <div class="homepage-section-header">
+            <div class="homepage-header-content">
+                <h2 class="homepage-section-title">Popular Products</h2>
+                <p class="homepage-section-subtitle">Discover our trending items</p>
+            </div>
+            <a href="{% url 'store' %}" class="homepage-btn-view-all">
+                <span>View All</span>
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        
+        <div class="row g-4">
+            {% for product in products %}
+            <div class="col-lg-4 col-md-6">
+                <div class="homepage-product-card h-100">
+                    <div class="homepage-product-image-wrap">
+                        <a href="{{ product.get_url }}" class="homepage-product-link">
+                            <img src="{{ product.product_image.url }}" 
+                                 alt="{{ product.name }}" 
+                                 class="homepage-product-image">
+                            <div class="homepage-product-overlay">
+                                <span class="homepage-view-product">View Product</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="homepage-product-info">
+                        <h4 class="homepage-product-name">
+                            <a href="{{ product.get_url }}">{{ product.name }}</a>
+                        </h4>
+                        <div class="homepage-product-price">Rs. {{ product.price }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ========================= BLOGS SECTION ========================= -->
+<section class="homepage-blogs-section">
+    <div class="container">
+        <div class="homepage-section-header">
+            <div class="homepage-header-content">
+                <h2 class="homepage-section-title">Latest Blogs</h2>
+                <p class="homepage-section-subtitle">Stay updated with our latest insights</p>
+            </div>
+            <a href="{% url 'blogs' %}" class="homepage-btn-view-all">
+                <span>View All</span>
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        
+        <div class="row g-4">
+            {% for blog in blogs %}
+            <div class="col-lg-4 col-md-6">
+                <article class="homepage-blog-card h-100">
+                    <div class="homepage-blog-image-wrap">
+                        <a href="{% url 'blog_detail' blog.id %}" class="homepage-blog-link">
+                            <img src="{{ blog.blog_image.url }}" 
+                                 alt="{{ blog.title }}" 
+                                 class="homepage-blog-image">
+                            <div class="homepage-blog-overlay">
+                                <span class="homepage-read-more">Read More</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="homepage-blog-content">
+                        <div class="homepage-blog-meta">
+                            <span class="homepage-blog-category">{{ blog.category.name }}</span>
+                        </div>
+                        <h3 class="homepage-blog-title">
+                            <a href="{{ blog.get_url }}">{{ blog.title }}</a>
+                        </h3>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 {% endblock %}

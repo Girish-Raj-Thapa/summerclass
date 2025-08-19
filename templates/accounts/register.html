@@ -1,0 +1,23 @@
+{% extends 'master/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="section-content">
+    <div class="card registration-card">
+        <div class="card-body">
+            <h2 class="card-title">Sign Up</h2>
+            <form method="post" class="registration-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary btn-block register-btn">
+                    Register
+                </button>
+            </form>
+            <p class="login-link">
+                Have an account? <a href="{% url 'user_login' %}">Log In</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

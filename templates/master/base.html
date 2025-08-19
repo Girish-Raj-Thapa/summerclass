@@ -1,36 +1,64 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ site_setting.site_title }}</title>
-  <meta name="description" content="{{ site_setting.meta_description | default:'' }}">
-  <meta name="keywords" content="{{ site_setting.meta_keywords | default:'' }}">
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="cache-control" content="max-age=604800" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% comment %} Favicon {% endcomment %}
-  {% if site_setting.favicon %}
-    <link rel="icon" href="{{ site_setting.favicon.url }}" type="image/x-icon">
-  {% endif %}
+  <title>Islington Market Place</title>
+  <meta name="description" content="Islington MarketPlace" />
+  <meta name="keywords" content="Islington MarketPlace, Islington" />
 
-  {% comment %} Open Graph Social Media {% endcomment %}
-  <meta property="og:title" content="{{ site_setting.site_title}}">
-  <meta property="og:description" content="{{ site_setting.meta_description}}">
+  <meta
+      property="og:image"
+      content="https://mohit-bucket.s3.us-east-1.amazonaws.com/media/photos/logos/Logo1_kQwoYga.PNG"
+    />
 
-   {% if site_setting.logo %}
-    <meta property="og:image" content="{{ site_setting.logo.url }}">
-  {% endif %}
+  <link
+      href="https://mohit-bucket.s3.us-east-1.amazonaws.com/media/photos/favicons/favicon.ico"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  {% load static %}
-  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- Open Graph for social media -->
+    <meta property="og:title" content="Islington MarketPlace" />
+    <meta property="og:description" content="Islington MarketPlace" />
+
+    <!-- Boostrap5 -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Boostrap JS Script-->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+
+
+    <!-- font-awesome  -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts CSS import link. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- custom style -->
+    <link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- custome js -->
+     <script src="{% static 'js/script.js' %}"></script>
+
 </head>
 <body>
-
-  {% include 'includes/header.html' %}
-
-  <div class="container my-4">
-    {% block content %}{% endblock %}
-  </div>
-
+  {% include 'includes/header.html' %} 
+  {% block content %} 
+  {% endblock %} 
   {% include 'includes/footer.html' %}
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

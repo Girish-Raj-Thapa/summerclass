@@ -1,0 +1,147 @@
+{% extends 'master/base.html' %} 
+{% load static %} 
+{% block content %}  
+
+<section class="section-content">
+  <div class="container">
+    {% if not cart_items %}
+      <div class="empty-cart-container">
+        <div class="empty-cart-content">
+          <i class="fas fa-shopping-cart empty-cart-icon"></i>
+          <h2 class="empty-cart-title">Your Shopping Cart is Empty</h2>
+          <p class="empty-cart-text">Looks like you haven't added anything to your cart yet.</p>
+          <a href="{% url 'store' %}" class="btn-continue-shopping">
+            <i class="fas fa-arrow-left me-2"></i>
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="row">
+        <!-- Cart Items Section -->
+        <div class="col-lg-8">
+          <div class="cart-items-card">
+            <table class="cart-table">
+              <thead style="padding-top:15px">
+                <tr>
+                  <th class="header-product">&nbsp;&nbsp; &nbsp;&nbsp; PRODUCT</th>
+                  <th class="header-quantity">QUANTITY</th>
+                  <th class="header-price">PRICE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                {% for cart_item in cart_items %}
+                <tr class="cart-item-row">
+                  <td class="product-cell">
+                    <div class="product-info-wrapper">
+                      <div class="product-image-wrapper">
+                        <img src="{{ cart_item.product.product_image.url }}" alt="{{ cart_item.product.product_name }}" class="cart-product-image">
+                      </div>
+                      <div class="product-details">
+                        <h6 class="product-name">
+                          <a href="{{ cart_item.product.get_url }}">{{ cart_item.product.name }}</a>
+                        </h6>
+                        <p class="product-category">{{ cart_item.product.category.name }}</p>
+                        
+                        {% if cart_item.product.stock <= 0 %}
+                          <div class="stock-status out-of-stock">
+                            <i class="fas fa-times-circle"></i>
+                            Out of stock
+                          </div>
+                        {% elif cart_item.product.stock <= 5 %}
+                          <div class="stock-status low-stock">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Only {{ cart_item.product.stock }} left in stock!
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </td>
+                  
+                  <td class="quantity-cell">
+                    <div class="quantity-controls">
+                      <a href="{% url 'remove_cart' cart_item.product.id %}" class="qty-btn qty-decrease">
+                        <i class="fas fa-minus"></i>
+                      </a>
+                      <input type="text" class="qty-input" value="{{ cart_item.quantity }}" readonly>
+                      {% if cart_item.quantity < cart_item.product.stock %}
+                        <a href="{% url 'add_cart' cart_item.product.id %}" class="qty-btn qty-increase">
+                          <i class="fas fa-plus"></i>
+                        </a>
+                      {% else %}
+                        <button class="qty-btn qty-increase disabled" disabled title="No more stock">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      {% endif %}
+                    </div>
+                  </td>
+                  
+                  <td class="price-cell">
+                    <div class="price-info">
+                      <div class="total-price">Rs.{{ cart_item.sub_total }}</div>
+                      <div class="unit-price">Rs.{{ cart_item.product.price }} each</div>
+                    </div>
+                  </td>
+                  
+                  <td class="actions-cell">
+                    <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="btn-remove-item">
+                      Remove
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Order Summary Section -->
+        <div class="col-lg-4">
+          <div class="order-summary-card">
+            <div class="summary-header">
+              <h5 class="summary-title">Order Summary</h5>
+            </div>
+            
+            <div class="summary-body">
+              <div class="summary-line">
+                <span class="summary-label">Sub-total:</span>
+                <span class="summary-amount">Rs. {{ total }}</span>
+              </div>
+              
+              <div class="summary-line">
+                <span class="summary-label">Tax:</span>
+                <span class="summary-amount">Rs. {{ tax }}</span>
+              </div>
+              
+              <hr>
+              
+              <div class="summary-line grand-total-line">
+                <span class="grand-total-label">Grand Total:</span>
+                <span class="grand-total-amount">Rs. {{ grand_total }}</span>
+              </div>
+              
+              <div class="payment-methods">
+                <img src="{% static 'images/misc/payments/payments.png' %}" alt="Payment Methods" class="payment-img">
+              </div>
+              
+              <div class="checkout-actions">
+                <a href="/checkout/" class="btn-checkout">
+                  <i class="fas fa-credit-card me-2"></i>
+                  Proceed to Checkout
+                </a>
+                
+                <a href="/" class="btn-continue">
+                  <i class="fas fa-arrow-left me-2"></i>
+                  Continue Shopping
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

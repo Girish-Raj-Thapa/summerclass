@@ -1,0 +1,35 @@
+[
+{
+  "model": "banners.banner",
+  "pk": 1,
+  "fields": {
+    "title": "banner 1",
+    "image": "photos/banners/banner1.jpg",
+    "link": "",
+    "status": true,
+    "created_at": "2025-08-17T12:35:12.293Z"
+  }
+},
+{
+  "model": "banners.banner",
+  "pk": 2,
+  "fields": {
+    "title": "banner 2",
+    "image": "photos/banners/banner2.jpg",
+    "link": "",
+    "status": true,
+    "created_at": "2025-08-17T12:35:25.628Z"
+  }
+},
+{
+  "model": "banners.banner",
+  "pk": 3,
+  "fields": {
+    "title": "banner 3",
+    "image": "photos/banners/banner3.jpg",
+    "link": "",
+    "status": true,
+    "created_at": "2025-08-17T12:35:33.259Z"
+  }
+}
+]

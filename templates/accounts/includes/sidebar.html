@@ -1,0 +1,59 @@
+<aside class="col-md-3">
+  <!-- SIDEBAR -->
+  <div class="dashboard-sidebar">
+    <ul class="list-group dashboard-nav">
+      <a
+        class="list-group-item dashboard-nav-item active"
+        href="{% url 'user_dashboard' %}"
+      >
+        <i class="fa fa-tachometer-alt"></i> Dashboard
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'my_orders' %}"
+      >
+        <i class="fa fa-shopping-bag"></i> My Orders
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'edit-profile' %}"
+      >
+        <i class="fa fa-user-edit"></i> Edit Profile
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'my_products' %}"
+      >
+        <i class="fa fa-box"></i> My Products
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'add_product' %}"
+      >
+        <i class="fa fa-plus-circle"></i> Add Product
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'my_request_sent' %}"
+      >
+        <i class="fa fa-paper-plane"></i> Requests Sent
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'my_requests_received' %}"
+      >
+        <i class="fa fa-inbox"></i> Requests Received
+      </a>
+      <a
+        class="list-group-item dashboard-nav-item"
+        href="{% url 'change_password' %}"
+      >
+        <i class="fa fa-lock"></i> Change Password
+      </a>
+    </ul>
+    <a class="btn dashboard-logout-btn" href="/accounts/logout/">
+      <i class="fa fa-power-off"></i> <span class="text">Log out</span>
+    </a>
+  </div>
+  <!-- SIDEBAR .//END -->
+</aside>

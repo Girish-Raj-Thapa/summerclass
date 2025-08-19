@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig', # Blog app
     'pages.apps.PagesConfig', # Pages App
     'sitesetting.apps.SitesettingConfig', # Site Setting app
+    'carts.apps.CartsConfig', # Cart App
+    'banners.apps.BannersConfig', # Banner App
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +80,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'pages.context_processors.pages_links', # context processor of pages app
                 'sitesetting.context_processors.site_settings', # Context Processor of Site Setting app
+                'products.context_processors.category_links', # Context Processor of Product App
+                'carts.context_processors.counter', # Context Processor of Carts App
             ],
         },
     },
@@ -84,6 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
 
+AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
