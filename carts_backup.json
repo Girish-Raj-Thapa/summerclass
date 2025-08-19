@@ -8,6 +8,14 @@
   }
 },
 {
+  "model": "carts.cart",
+  "pk": 2,
+  "fields": {
+    "cart_id": "rcu19v9e5n50ww2le0y51kgau06lyzug",
+    "date_added": "2025-08-19"
+  }
+},
+{
   "model": "carts.cartitem",
   "pk": 6,
   "fields": {

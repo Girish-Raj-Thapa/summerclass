@@ -1,0 +1,50 @@
+[
+{
+  "model": "accounts.account",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$xCwZbstQVN0xRhTKVCU25m$2xdnZUcyvUTKQx70kALTWPJDVb5gdCEEny3c3ymWE/M=",
+    "last_login": "2025-08-19T14:58:10.151Z",
+    "is_superuser": false,
+    "first_name": "grix",
+    "last_name": "thpz",
+    "username": "grix",
+    "email": "grzthapz@gmail.com",
+    "phone_number": "",
+    "profile_picture": "",
+    "gender": null,
+    "status": "pending",
+    "date_joined": "2025-08-18T04:01:53.517Z",
+    "is_admin": true,
+    "is_staff": true,
+    "is_active": true,
+    "is_superadmin": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.account",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$GIjkrmUf8ygNuh9DuZOBZu$7vOIwuXKPXY5d/7IInNrwzdZxVQTcrJUaMRvbF77kc8=",
+    "last_login": "2025-08-19T16:02:03.647Z",
+    "is_superuser": false,
+    "first_name": "Girish",
+    "last_name": "Thapa",
+    "username": "girish",
+    "email": "girish@gmail.com",
+    "phone_number": "9876543210",
+    "profile_picture": "",
+    "gender": null,
+    "status": "active",
+    "date_joined": "2025-08-19T15:15:50.638Z",
+    "is_admin": false,
+    "is_staff": false,
+    "is_active": true,
+    "is_superadmin": false,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
