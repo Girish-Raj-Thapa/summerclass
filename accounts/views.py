@@ -38,9 +38,10 @@ def user_register(request):
 
             # Updates the user object
             user.phone_number = phone_number
+            user.is_active = False
             user.save()
 
-            messages.success(request, "Registration Successful")
+            messages.success(request, "Registration Successful\nAsk admin to activate your account")
             return redirect('home')
     else:
         form = RegistrationForm()
