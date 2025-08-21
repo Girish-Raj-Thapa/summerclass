@@ -39,3 +39,15 @@ class ProductForm(forms.ModelForm):
         if stock is not None and stock < 0:
             raise forms.ValidationError("Stock cannot be negative.")
         return stock
+    
+
+class ContactSellerForm(forms.Form):
+    subject = forms.CharField(max_length=120, widget=forms.TextInput(attrs={
+        "class": "form-control",
+        "placeholder": "Subject",
+    }))
+    message = forms.CharField(widget=forms.Textarea(attrs={
+        "class": "form-control",
+        "rows": 5,
+        "placeholder": "Write your message…",
+    }))
