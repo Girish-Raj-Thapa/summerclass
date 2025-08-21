@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='user_logout'), 
 
     path('dashboard/', views.user_dashboard, name='user_dashboard'), # Dashboard Page
-    path('edit-profile/', views.edit_profile, name='edit-profile'), #Edit Profile
+    path('edit-profile/', views.edit_profile, name='edit_profile'), #Edit Profile
 
     path('my-products/', views.my_products, name='my_products'), # MY Products
     path('products/<int:product_id>/edit/', views.edit_product, name='edit_product'),

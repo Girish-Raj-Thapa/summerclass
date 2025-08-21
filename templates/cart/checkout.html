@@ -1,0 +1,232 @@
+{%extends 'master/base.html'%} {%load static%} {%block content%}
+<section class="section-content padding-y bg">
+  <div class="container">
+    <!-- ============================ CHECKOUT COMPONENT ================================= -->
+
+    <div class="row g-4">
+      <!-- Billing Address Section -->
+      <div class="col-lg-7">
+        <div class="checkout-billing-card">
+          <div class="checkout-card-header">
+            <h4 class="checkout-card-title">Billing Address</h4>
+          </div>
+          <div class="checkout-card-body">
+            <form action="#" method="POST">
+              {%csrf_token%}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    name="first_name"
+                    id="first_name"
+                    class="form-control checkout-input"
+                    value="{{ user.first_name }}"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    id="last_name"
+                    class="form-control checkout-input"
+                    value="{{ user.last_name }}"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div class="row g-3 mt-2">
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control checkout-input"
+                    value="{{ user.email }}"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    class="form-control checkout-input"
+                    value="{{ user.phone_number }}"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div class="row g-3 mt-2">
+                <div class="col-md-6">
+                  <label for="address_line_1" class="form-label">Address Line 1</label>
+                  <input
+                    type="text"
+                    name="address_line_1"
+                    id="address_line_1"
+                    class="form-control checkout-input"
+                    value=""
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="address_line_2" class="form-label">Address Line 2</label>
+                  <input
+                    type="text"
+                    name="address_line_2"
+                    id="address_line_2"
+                    class="form-control checkout-input"
+                    value=""
+                  />
+                </div>
+              </div>
+              
+              <div class="row g-3 mt-2">
+                <div class="col-md-4">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    id="city"
+                    class="form-control checkout-input"
+                    value=""
+                    required
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="state" class="form-label">State</label>
+                  <input
+                    type="text"
+                    name="state"
+                    id="state"
+                    class="form-control checkout-input"
+                    value=""
+                    required
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="country" class="form-label">Country</label>
+                  <input
+                    type="text"
+                    name="country"
+                    id="country"
+                    class="form-control checkout-input"
+                    value=""
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <label for="order_note" class="form-label">Order Note</label>
+                <textarea
+                  name="order_note"
+                  id="order_note"
+                  rows="3"
+                  class="form-control checkout-input"
+                  placeholder="Any special instructions for your order..."
+                ></textarea>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div class="col-lg-5">
+        <div class="checkout-summary-card">
+          <div class="checkout-card-header">
+            <h4 class="checkout-card-title">Order Summary</h4>
+          </div>
+          <div class="checkout-card-body">
+            <div class="checkout-items-table">
+              <div class="table-responsive">
+                <table class="table table-borderless">
+                  <thead class="checkout-table-header">
+                    <tr class="small text-uppercase">
+                      <th scope="col">Product</th>
+                      <th scope="col" width="80" class="text-center">Qty</th>
+                      <th scope="col" width="100" class="text-end">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody class="checkout-table-body">
+                    {%for cart_item in cart_items%}
+                    <tr class="checkout-item-row">
+                      <td>
+                        <div class="checkout-product-info">
+                          <div class="checkout-product-image">
+                            <img src="{{cart_item.product.product_image.url}}" class="checkout-img" alt="{{cart_item.product.name}}" />
+                          </div>
+                          <div class="checkout-product-details">
+                            <a href="{{cart_item.product.get_url}}" class="checkout-product-name">
+                              {{cart_item.product.name}}
+                            </a>
+                            {% if cart_item.product.stock <= 0 %}
+                              <div class="checkout-stock-status out-of-stock">
+                                <i class="fas fa-exclamation-circle"></i>
+                                Out of stock
+                              </div>
+                            {% elif cart_item.product.stock <= 5 %}
+                              <div class="checkout-stock-status low-stock">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Only {{ cart_item.product.stock }} left!
+                              </div>
+                            {% endif %}
+                            <div class="checkout-product-variations">
+                              {%if cart_item.variations.all%}
+                                {%for item in cart_item.variations.all%}
+                                  <span class="checkout-variation">{{item.variation_category|capfirst}}: {{item.variation_value|capfirst}}</span>
+                                {%endfor%}
+                              {%endif%}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <span class="checkout-quantity">{{cart_item.quantity}}</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="checkout-price-info">
+                          <div class="checkout-total-price">Rs. {{cart_item.sub_total}}</div>
+                          <small class="checkout-unit-price">Rs. {{cart_item.product.price}} each</small>
+                        </div>
+                      </td>
+                    </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="checkout-actions">
+              <a 
+                href="{% url 'place_order' %}"
+                type="submit"
+                name="submit"
+                class="btn btn-checkout-place w-100 mb-3"
+              >
+                <i class="fas fa-credit-card me-2"></i>
+                Place Order
+              </a>
+              <a href="{%url 'store'%}" class="btn btn-checkout-continue w-100">
+                <i class="fas fa-arrow-left me-2"></i>
+                Continue Shopping
+              </a>
+            </div>
+          </div>
+        </div>
+            </form>
+      </div>
+    </div>
+
+    <!-- ============================ CHECKOUT COMPONENT END ================================= -->
+  </div>
+</section>
+
+{%endblock%}

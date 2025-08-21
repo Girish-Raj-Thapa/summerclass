@@ -16,15 +16,14 @@ def store(request, category_slug=None):
     products = None
     categories = None
 
-    # Using slug to find the category, if found filter according to the slug
-    if category_slug != None:
+    if category_slug is not None:
         categories = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=categories, status=True)
-    
-    # If no slug is passed, redirect to the normal store page
+        # Filter by category + approved + active
+        products = Product.objects.filter(category=categories, is_approved=True, status=True)
     else:
-        products = Product.objects.all().filter(status=True).order_by('id')
-    
+        # All approved and active products
+        products = Product.objects.filter(is_approved=True, status=True).order_by('id')
+
     paginator = Paginator(products, 6)
     page = request.GET.get('page')
     paged_products = paginator.get_page(page)
@@ -58,28 +57,24 @@ def product_detail(request, category_slug, product_slug):
 
 
 def search(request):
-    keyword = request.GET.get('keyword', '').strip()
-    products = Product.objects.none()
-    product_count = 0
-    
-    if not keyword:
-        return redirect('home')  # or redirect('home')
-    
-    products = Product.objects.filter(
-        status=True, 
-        is_approved=True
-        ).order_by('-created_date').filter(
-        Q(description__icontains=keyword) | 
-        Q (product_name__icontains=keyword)
-        )
-    product_count = products.count()
-            
+    if 'keyword' in request.GET:
+        keyword = request.GET.get ('keyword', '').strip()
+        products = Product.objects.none ()
+
+        if keyword:
+            # Search in multiple fields: description or product_name
+            products = Product.objects.order_by('-created_at'). filter(
+                 Q(description__icontains=keyword) | 
+                Q (name__icontains=keyword)
+            )
+           
+
     context = {
-        'products': products,
-        'product_count': product_count,
-        'keyword': keyword,
+    'products': products,
+    'product_count': products. count()
     }
-    return render(request, 'products/products.html', context)
+
+    return render (request, 'products/products.html', context)
 
 
 User = get_user_model()

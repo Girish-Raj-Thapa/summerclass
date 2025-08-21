@@ -61,7 +61,7 @@
                   
                   <td class="quantity-cell">
                     <div class="quantity-controls">
-                      <a href="{% url 'remove_cart' cart_item.product.id %}" class="qty-btn qty-decrease">
+                      <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="qty-btn qty-decrease">
                         <i class="fas fa-minus"></i>
                       </a>
                       <input type="text" class="qty-input" value="{{ cart_item.quantity }}" readonly>
@@ -85,7 +85,7 @@
                   </td>
                   
                   <td class="actions-cell">
-                    <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="btn-remove-item">
+                    <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn-remove-item">
                       Remove
                     </a>
                   </td>
@@ -126,7 +126,7 @@
               </div>
               
               <div class="checkout-actions">
-                <a href="/checkout/" class="btn-checkout">
+                <a href="{% url 'checkout' %}" class="btn-checkout">
                   <i class="fas fa-credit-card me-2"></i>
                   Proceed to Checkout
                 </a>

@@ -5,7 +5,7 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('owner', 'is_approved', 'slug')  # admin controls approval
+        exclude = ('owner', 'is_approved', 'slug', 'created_at', 'updated_date')  # admin controls approval
         widgets = {
             # Keep FileInput as we don't want "Currently: ... Clear"
             "images": forms.FileInput(attrs={'class': 'form-control'}),
@@ -15,7 +15,7 @@ class ProductForm(forms.ModelForm):
         super(ProductForm, self).__init__(*args, **kwargs)
         # Make image optional on UPDATE
         if self.instance and self.instance.pk:
-            self.fields['images'].required = False
+            self.fields['product_image'].required = False
         for f in self.fields.values():
             existing = f.widget.attrs.get("class", "")
             f.widget.attrs['class'] = (existing + " form-control").strip()

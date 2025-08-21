@@ -4,11 +4,12 @@ from . models import Account
 
 # Register your models here.
 class AccountAdmin(UserAdmin):
-    list_display = ('email', 'username', 'last_login', 'date_joined', 'status', 'is_active')
-    list_display_links = ('email',)
+    list_display = ('email', 'username', 'last_login', 'date_joined','seller_status','is_active')
+    list_display_links = ('email', )
     readonly_fields = ('last_login', 'date_joined')
-    ordering = ('-date_joined',)  # -date shows in descending order
-
+    list_editable = ("seller_status",)
+    ordering = ('-date_joined',) #- date shows in descending order
+    
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()

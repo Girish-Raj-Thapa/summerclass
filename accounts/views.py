@@ -143,6 +143,7 @@ def user_dashboard(request):
         "my_products_pending": my_products_qs.filter(is_approved=False).count(),
         "my_products_active": my_products_qs.filter(status=True).count(),
         "my_products_inactive": my_products_qs.filter(status=False).count(),
+        'user': user,
     }
 
     return render(request, 'accounts/dashboard.html', context)
@@ -227,7 +228,8 @@ def edit_product(request, product_id):
             return redirect('my_products')
     else:
         form = ProductForm(instance=product)
-    return render(request, 'accounts/add_product.html', {'form': form})
+
+    return render(request, 'accounts/edit_product.html', {'form': form})
 
 
 @login_required(login_url='user_login')
@@ -240,7 +242,7 @@ def add_product(request):
             p.is_approved = False  # pending by default
 
             # Auto slug (unique)
-            base = slugify(p.product_name)
+            base = slugify(p.name)
             slug = base or "product"
             i = 1
             while Product.objects.filter(slug=slug).exists():

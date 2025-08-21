@@ -53,10 +53,11 @@ class Account(AbstractBaseUser, PermissionsMixin):
         ('O', 'Other'),
     ]
 
-    STATUS_CHOICES = [
+    SELLER_STATUS_CHOICES = [
         ('active', 'Active'),
         ('pending', 'Pending'),
         ('banned', 'Banned'),
+        ('none', 'None'),
     ]
 
     first_name = models.CharField(max_length=500)
@@ -76,11 +77,13 @@ class Account(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True
     )
+    
+    payment_qr = models.ImageField(upload_to="photos/user_qr/", blank=True, null=True)
 
-    status = models.CharField(
+    seller_status = models.CharField(
         max_length=20,
-        choices=STATUS_CHOICES,
-        default='pending'
+        choices=SELLER_STATUS_CHOICES,
+        default='none'
     )
 
     # Required

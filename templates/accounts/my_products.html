@@ -1,0 +1,161 @@
+{% extends 'master/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="section-conten padding-y bg my-products-page">
+  <div class="container">
+    <div class="row">
+      {% include 'accounts/includes/sidebar.html' %}
+      <main class="col-md-9">
+        <article class="card my-products-card">
+          <header class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-box-open"></i>
+                <strong>My Products</strong>
+              </div>
+              <div class="product-stats">
+                <span class="stat-item">Total: <strong>{{ stats.total }}</strong></span>
+                <span class="stat-separator">·</span>
+                <span class="stat-item">Approved: <strong class="text-success">{{ stats.approved }}</strong></span>
+                <span class="stat-separator">·</span>
+                <span class="stat-item">Pending: <strong class="text">{{ stats.pending }}</strong></span>
+                <span class="stat-separator">·</span>
+                <span class="stat-item">Inactive: <strong class="text-muted">{{ stats.inactive }}</strong></span>
+              </div>
+            </div>
+          </header>
+
+          <div class="card-body p-0">
+            {% if products and products.object_list %}
+            <div class="table-responsive">
+              <table class="table table-hover mb-0 products-table">
+                <thead>
+                  <tr>
+                    <th style="width: 56px"></th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Approval</th>
+                    <th style="width: 140px">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in products %}
+                  <tr>
+                    <td>
+                      <div class="product-image-container">
+                        {% if p.product_image %}
+                          <img src="{{ p.product_image.url }}" alt="{{ p.name }}" class="product-thumbnail"/>
+                        {% else %}
+                          <img src="{% static 'images/default/default-product.png' %}" alt="Default" class="product-thumbnail"/>
+                        {% endif %}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="product-info">
+                        <div class="product-name">{{ p.name }}</div>
+                        <div class="product-link">
+                          {% if p.is_approved and p.status %}
+                            <a href="{{ p.get_url }}" target="_blank">
+                              <i class="fas fa-external-link-alt me-1"></i>View public page
+                            </a>
+                          {% else %}
+                            <span class="text-muted">Not publicly visible</span>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="category-cell">{{ p.category }}</td>
+                    <td class="price-cell">Rs. {{ p.price }}</td>
+                    <td class="stock-cell">{{ p.stock }}</td>
+                    <td>
+                      {% if p.status %}
+                        <span class="badge status-active">Active</span>
+                      {% else %}
+                        <span class="badge status-inactive">Inactive</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if p.is_approved %}
+                        <span class="badge approval-approved">Approved</span>
+                      {% else %}
+                        <span class="badge approval-pending">Pending</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <div class="action-buttons">
+                        <a href="{% url 'edit_product' p.id %}" class="btn btn-sm btn-edit">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'delete_product' p.id %}" class="btn btn-sm btn-delete" onclick="return confirm('Delete this product?');">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+              {% if products.has_other_pages %}
+              <nav>
+                <ul class="pagination mb-0">
+                  {% if products.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ products.previous_page_number }}">
+                      <i class="fas fa-chevron-left"></i>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-chevron-left"></i></span>
+                  </li>
+                  {% endif %}
+
+                  {% for i in products.paginator.page_range %}
+                    {% if products.number == i %}
+                      <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                    {% else %}
+                      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if products.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ products.next_page_number }}">
+                      <i class="fas fa-chevron-right"></i>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link"><i class="fas fa-chevron-right"></i></span>
+                  </li>
+                  {% endif %}
+                </ul>
+              </nav>
+              {% endif %}
+            </div>
+
+            {% else %}
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-box-open"></i></div>
+              <p class="empty-message">You haven't posted any products yet.</p>
+              <a href="{% url 'add_product' %}" class="btn btn-primary-custom">
+                <i class="fas fa-plus me-2"></i>Post your first product
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -7,6 +7,8 @@ class Page(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
+    active = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.title

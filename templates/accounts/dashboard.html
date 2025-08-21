@@ -1,16 +1,14 @@
-{% extends 'master/base.html' %} 
-{% load static %} 
-{% block content %}
+{% extends 'master/base.html' %} {% load static %} {% block content %}
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-conten padding-y bg">
   <div class="container">
     <div class="row">
-      {% include 'accounts/includes/sidebar.html' %} 
+      {% include 'accounts/includes/sidebar.html' %}
       <main class="col-md-9">
         <article class="dashboard-main-card">
           <header class="dashboard-header">
-            <strong class="d-inline-block mr-3">Logged in as:</strong>
-            <span class="user-name">Mohit Paudel</span>
+            <strong class="d-inline-block me-3">Logged in as:</strong>
+            <span class="user-name">{{ user.first_name }} {{ user.last_name }}</span>
           </header>
           <div class="dashboard-body">
             <div class="row">
@@ -42,30 +40,36 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 mb-4">
-                <div class="dashboard-stat-card">
-                  <div class="stat-card-body">
-                    <div class="stat-icon">
-                      <i class="fa fa-box"></i>
+              <div class="col-md-12 mb-4">
+                <div class="dashboard-stat-card products-card">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3">My Products</h5>
+                    <div class="d-flex flex-wrap gap-3">
+                      <div class="me-4 mb-2">
+                        <strong>Total:</strong> {{ my_products_total }}
+                      </div>
+                      <div class="me-4 mb-2 text-success">
+                        <strong>Approved:</strong> {{ my_products_approved }}
+                      </div>
+                      <div class="me-4 mb-2 text-warning">
+                        <strong>Pending:</strong> {{ my_products_pending }}
+                      </div>
+                      <div class="me-4 mb-2 text-primary">
+                        <strong>Active:</strong> {{ my_products_active }}
+                      </div>
+                      <div class="me-4 mb-2 text-secondary">
+                        <strong>Inactive:</strong> {{ my_products_inactive }}
+                      </div>
                     </div>
-                    <h5 class="stat-title">My Products</h5>
-                    <h4 class="stat-number">8</h4>
-                    <a href="{% url 'my_products' %}" class="stat-link"
+                    <a
+                      class="btn btn-sm btn-outline-primary mt-2 me-2"
+                      href="{% url 'my_products' %}"
                       >Manage Products</a
                     >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 mb-4">
-                <div class="dashboard-stat-card">
-                  <div class="stat-card-body">
-                    <div class="stat-icon">
-                      <i class="fa fa-paper-plane"></i>
-                    </div>
-                    <h5 class="stat-title">Requests Sent</h5>
-                    <h4 class="stat-number">3</h4>
-                    <a href="{% url 'my_request_sent' %}" class="stat-link"
-                      >View Sent</a
+                    <a
+                      class="btn btn-sm btn-primary mt-2"
+                      href="{% url 'add_product' %}"
+                      >Add Product</a
                     >
                   </div>
                 </div>

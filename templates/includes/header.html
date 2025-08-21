@@ -112,7 +112,11 @@
         <div class="col-lg-auto col-md-3 col-12">
           <div class="user-widget">
             <div class="user-info">
-              <div class="user-welcome">Welcome guest!</div>
+              {% if user.is_authenticated %}
+              <div class="user-welcome">Welcome {{ user.first_name }}</div>
+              {% else %}
+              <div class="user-welcome">Welcome Guest</div>
+              {% endif %}
               <div class="user-links">
                 {% if user.is_authenticated %}
                 <a href="{% url 'user_dashboard' %}">Dashboard</a>

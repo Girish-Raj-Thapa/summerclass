@@ -1,152 +1,135 @@
-{% extends 'master/base.html' %} 
-{% load static %} 
+{% extends 'master/base.html' %}
+{% load static %}
 {% block content %}
-    
-<section class="section-conten padding-y bg">
+
+<section class="section-content padding-y bg">
   <div class="container">
     <div class="row">
-      {% include 'accounts/includes/sidebar.html' %} 
+      <!-- Sidebar -->
+      
+        {% include 'accounts/includes/sidebar.html' %}
+      
 
+      <!-- Main Content -->
       <main class="col-md-9">
-        <article class="card">
+        <article class="card edit-profile-card">
           <header class="card-header">
-            <strong class="d-inline-block mr-3">Edit your profile</strong>
+            <i class="fas fa-user-edit"></i>
+            <strong>Edit your profile</strong>
           </header>
+
           <div class="card-body">
-            <div class="text-right">
+            <!-- Profile Image -->
+            <div class="profile-img-container mb-4 text-center">
               <img
-                src="/static/images/default/default-user.png"
+                src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'images/default/default-user.png' %}{% endif %}"
                 alt="Profile Picture"
-                width="100"
-                style="border-radius: 50px"
+                class="profile-img rounded-circle"
+                id="profilePreview"
               />
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <form
-                  action="/accounts/edit_profile/"
-                  method="POST"
-                  enctype="multipart/form-data"
-                >
-                  <input
-                    type="hidden"
-                    name="csrfmiddlewaretoken"
-                    value="SIHCbcMTGsQFp8ZZSEubAkmcjh3hIlRenZANRBhU965QBMnt3vAdfh7cra5YXbtM"
-                  />
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label>First Name</label>
-                      <input
-                        type="text"
-                        name="first_name"
-                        value="Islington"
-                        maxlength="50"
-                        class="form-control"
-                        required
-                        id="id_first_name"
-                      />
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label>Last Name</label>
-                      <input
-                        type="text"
-                        name="last_name"
-                        value="College"
-                        maxlength="50"
-                        class="form-control"
-                        required
-                        id="id_last_name"
-                      />
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label>Phone Number</label>
-                      <input
-                        type="text"
-                        name="phone_number"
-                        value="9812344567"
-                        maxlength="50"
-                        class="form-control"
-                        required
-                        id="id_phone_number"
-                      />
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label>Profile Picture</label>
-                      <input
-                        type="file"
-                        name="profile_picture"
-                        accept="image/*"
-                        class="form-control"
-                        id="id_profile_picture"
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label>Address Line 1</label>
-                    <input
-                      type="text"
-                      name="address_line_1"
-                      maxlength="100"
-                      class="form-control"
-                      id="id_address_line_1"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Address Line 2</label>
-                    <input
-                      type="text"
-                      name="address_line_2"
-                      maxlength="100"
-                      class="form-control"
-                      id="id_address_line_2"
-                    />
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label>City</label>
-                      <input
-                        type="text"
-                        name="city"
-                        maxlength="20"
-                        class="form-control"
-                        id="id_city"
-                      />
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label>State</label>
-                      <input
-                        type="text"
-                        name="state"
-                        maxlength="20"
-                        class="form-control"
-                        id="id_state"
-                      />
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label>Country</label>
-                      <input
-                        type="text"
-                        name="country"
-                        maxlength="20"
-                        class="form-control"
-                        id="id_country"
-                      />
-                    </div>
-                  </div>
-                  <input type="submit" value="Save" class="btn btn-primary" />
-                </form>
+              <div
+                class="profile-img-overlay"
+                onclick="document.getElementById('id_profile_picture').click()"
+              >
+                <i class="fas fa-camera"></i>
               </div>
             </div>
-            <!-- row.// -->
+
+            <!-- Profile Update Form -->
+            <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+
+              <!-- Name Fields -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    {{ form.first_name.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      {{ form.first_name }}
+                    </div>
+                    {{ form.first_name.errors }}
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    {{ form.last_name.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      {{ form.last_name }}
+                    </div>
+                    {{ form.last_name.errors }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contact Fields -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                      {{ form.email }}
+                    </div>
+                    {{ form.email.errors }}
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    {{ form.phone_number.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                      {{ form.phone_number }}
+                    </div>
+                    {{ form.phone_number.errors }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional Fields -->
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    {{ form.gender.label_tag }}
+                    {{ form.gender }}
+                    {{ form.gender.errors }}
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    {{ form.profile_picture.label_tag }}
+                    {{ form.profile_picture }}
+                    {{ form.profile_picture.errors }}
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    {{ form.payment_qr.label_tag }}
+                    {{ form.payment_qr }}
+                    {{ form.payment_qr.errors }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-save">
+                  <i class="fas fa-save me-2"></i>
+                  Save Changes
+                </button>
+              </div>
+            </form>
           </div>
-          <!-- card-body .// -->
         </article>
-        <!-- order-group.// -->
       </main>
     </div>
-    <!-- row.// -->
   </div>
 </section>
- {% endblock %}
+
+{% endblock %}

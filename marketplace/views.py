@@ -9,8 +9,8 @@ from banners.models import Banner
 #     return render(request, 'basic/home.html', {'products': products, 'blogs':blogs})
 
 def home(request):
-    products = Product.objects.order_by('-created_at')[:6]
-    banners = Banner.objects.all()
+    products = Product.objects.filter(is_approved=True, status=True).order_by('-created_at')[:6]
+    banners = Banner.objects.filter(status=True)
     blogs = Blog.objects.order_by('-created_at')[:3]
     context = {
         'products': products, 
@@ -24,11 +24,8 @@ def cart(request):
     return render(request, 'cart/cart.html')
 
 
-def checkout(request):
-    return render(request, 'orders/checkout.html')
 
-def place_order(request):
-    return render(request, 'orders/place_order.html')
+
 
 def order_complete(request):
     return render(request, 'orders/order_complete.html')

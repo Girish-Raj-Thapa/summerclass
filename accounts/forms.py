@@ -65,7 +65,8 @@ class RegistrationForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'gender', 'profile_picture']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'gender', 'profile_picture', 'payment_qr']
+
 
     # widgets = {
     #     "first_name": forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First name'}),

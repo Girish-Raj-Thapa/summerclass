@@ -1,0 +1,119 @@
+{% extends 'master/base.html' %} {% load static %} {% block content %}
+<section class="section-conten padding-y bg">
+  <div class="container">
+    <div class="row">
+      {% include 'accounts/includes/sidebar.html' %}
+      <main class="col-md-9">
+        <article class="card post-product-card">
+          <header class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-plus-circle"></i>
+                <strong>Post a Product</strong>
+              </div>
+            </div>
+          </header>
+          <div class="card-body">
+            {# Messages #} 
+            {% if messages %} 
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} mb-3">{{ message }}</div>
+            {% endfor %} 
+            {% endif %} 
+            {{ form.non_field_errors }}
+            {{ form.errors }}
+            <form method="POST" enctype="multipart/form-data" action="{% url 'add_product' %}">
+              {% csrf_token %}
+
+              <!-- Product Name -->
+              <div class="row mb-3">
+                <div class="col-12">
+                  <div class="mb-3">
+                    {{ form.name.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-box"></i>
+                      </span>
+                      {{ form.name }}
+                    </div>
+                    {{ form.name.errors }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category, Price, Stock -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    {{ form.category.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-tags"></i>
+                      </span>
+                      {{ form.category }}
+                    </div>
+                    {{ form.category.errors }}
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="mb-3">
+                    {{ form.price.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-rupee-sign"></i>
+                      </span>
+                      {{ form.price }}
+                    </div>
+                    {{ form.price.errors }}
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="mb-3">
+                    {{ form.stock.label_tag }}
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-warehouse"></i>
+                      </span>
+                      {{ form.stock }}
+                    </div>
+                    {{ form.stock.errors }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                {{ form.description.label_tag }} {{ form.description }} 
+                {{ form.description.errors }}
+              </div>
+
+              <!-- Images -->
+              <div class="mb-3">
+                {{ form.product_image.label_tag }} {{ form.product_image }} 
+                {{ form.product_image.errors }}
+              </div>
+
+              <!-- Status -->
+              <div class="mb-4">
+                {{ form.status.label_tag }} {{ form.status }}
+                <small class="form-text text-muted mt-2"
+                  >If off, your product stays hidden even after approval.</small
+                >
+                {{ form.status.errors }}
+              </div>
+
+              <!-- Submit Button -->
+              <div class="text-center">
+                <button type="submit" class="btn btn-submit">
+                  <i class="fas fa-paper-plane me-2"></i>
+                  Submit for Approval
+                </button>
+              </div>
+            </form>
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+</section>
+{% endblock %}
