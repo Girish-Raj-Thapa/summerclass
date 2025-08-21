@@ -1,5 +1,6 @@
 from django import forms 
 from .models import Account 
+from django.contrib.auth.forms import PasswordChangeForm
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(
@@ -89,3 +90,45 @@ class ProfileUpdateForm(forms.ModelForm):
             self.fields[field].widget.attrs['class'] = 'form-control'
 
 
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    """
+    Customizable password change form:
+    - Bootstrap-ready widgets
+    - Clear labels/placeholders
+    - Friendly error messages
+    - Shows password rules (from AUTH_PASSWORD_VALIDATORS)
+    """
+
+    # Optional: override default messages
+    error_messages = {
+        "password_incorrect": "Your current password is incorrect.",
+        "password_mismatch": "The two new passwords didn’t match.",
+    }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Add Bootstrap classes & placeholders
+        self.fields['old_password'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter current password'
+        })
+        self.fields['new_password1'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter new password'
+        })
+        self.fields['new_password2'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Confirm new password'
+        })
+
+
+    # If you want additional custom validation, you can extend clean():
+    # def clean(self):
+    #     cleaned = super().clean()
+    #     # Example: block passwords that contain the username/email
+    #     if self.user and self.user.email:
+    #         if self.cleaned_data.get("new_password1") and self.user.email.split("@")[0].lower() in self.cleaned_data["new_password1"].lower():
+    #             self.add_error("new_password1", "New password should not contain parts of your email.")
+    #     return cleaned

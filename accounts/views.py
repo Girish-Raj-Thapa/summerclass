@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from . forms import RegistrationForm
+from . forms import RegistrationForm, CustomPasswordChangeForm
 from . models import Account
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages, auth
@@ -12,6 +12,9 @@ from products.models import Product
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.db.models import F
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
+from django.contrib.auth import update_session_auth_hash
 # from message.models import Message
 
 # Create your views here.
@@ -54,25 +57,67 @@ def user_register(request):
 
 
 def user_login(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         email = request.POST.get('email', '').strip()
         password = request.POST.get('password', '')
-
+        
         # Returns user object
         user = auth.authenticate(email=email, password=password)
-
+        
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+                    
+                    # Getting product variation by cart id
+                    product_variation = []
+                    for item in cart_item:
+                        variation = item.variations.all()
+                        product_variation.append(list(variation))
+                    
+                    # Get the cart items from the user to access his product variations
+                    cart_item = CartItem.objects.filter(user=user)
+            
+                    # existing variations, current variation, item id needed
+                    # If the current variation is inside the existing variations, then increase
+                    
+                    ex_var_list = []
+                    id = []
+                    for item in cart_item:
+                        existing_variation = item.variations.all()
+                        ex_var_list.append(list(existing_variation))
+                        id.append(item.id)
+                    
+                    # product_variation = [1, 2, 3, 4, 6]
+                    # ex_var_list = [4, 5, 3, 5]
+                    for pr in product_variation:
+                        if pr in ex_var_list:
+                            index = ex_var_list.index(pr)
+                            item_id = id[index]
+                            item = CartItem.objects.get(id=item_id)
+                            item.quantity += 1
+                            item.user = user
+                            item.save()
+                        else:
+                            cart_item = CartItem.objects.filter(cart=cart)
+                            for item in cart_item:
+                                item.user = user
+                                item.save()
+            except:
+                pass
             auth.login(request, user)
             messages.success(request, "You are now logged in.")
             # Redirect to next page if provided
             next_url = request.GET.get('next') or request.POST.get('next')
             if next_url:
                 return redirect(next_url)
-            return redirect('home')
+            return redirect('user_dashboard')
+        
         else:
             messages.error(request, "Invalid login credentials.")
             return redirect('user_login')
-        
     # return render(request, 'accounts/login.html')
     return render(request, 'accounts/login.html', {'next': request.GET.get('next')})
 
@@ -103,8 +148,21 @@ def user_dashboard(request):
     return render(request, 'accounts/dashboard.html', context)
 
 
+@login_required(login_url = 'user_login')
 def change_password(request):
-    return render(request, 'accounts/change_password.html')
+    if request.method == "POST":
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Keep the user logged in after password change
+            update_session_auth_hash(request, user)
+            messages.success(request, "Your password was updated successfully.")
+            return redirect("user_dashboard")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {'form': form})
 
 
 @login_required(login_url='user_login')
@@ -141,10 +199,12 @@ def my_products(request):
     page = request.GET.get('page')
     products = paginator.get_page(page)
 
-    return render(request, 'accounts/my_products.html', {
+    context = {
         "products": products,
         "stats": stats,
-    })
+    }
+
+    return render(request, 'accounts/my_products.html', context)
 
 
 @login_required(login_url='user_login')
