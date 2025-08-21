@@ -114,3 +114,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         name = f"{self.first_name} {self.last_name}".strip()
         return name or self.email
+    
+    def is_seller_active(self) -> bool:
+        return self.seller_status == 'active'

@@ -6,32 +6,23 @@ from carts.views import _cart_id
 from django.core.paginator import Paginator
 from django.db.models import Q
 
-# Create your views here.
-# def products(request):
-#     products = Product.objects.all()
-#     return render(request, 'basic/products.html', {'products': products})
-
-# def product_detail(request, id):
-#     product = get_object_or_404(Product, id=id)
-#     return render(request, 'basic/product_details.html', {'product': product})
-
 def store(request, category_slug=None):
     products = None
     categories = None
 
+    # Using slug to find the category, if found filter according to the slug
     if category_slug != None:
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=categories, status=True)
-        paginator = Paginator(products, 3)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
-        product_count = len(paged_products)
+    
+    # If no slug is passed, redirect to the normal store page
     else:
         products = Product.objects.all().filter(status=True).order_by('id')
-        paginator = Paginator(products, 3)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
-        product_count = len(paged_products)  
+    
+    paginator = Paginator(products, 6)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+    product_count = products.count()
 
     context = {
         'products': paged_products,
@@ -43,6 +34,10 @@ def store(request, category_slug=None):
 def product_detail(request, category_slug, product_slug):
     try:
         product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+
+        if not product.is_approved and not (request.user.is_staff or request.user == getattr(product, 'owner', None)):
+            raise Http404("Product not found")
+        
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=product).exists()
     except Product.DoesNotExist:
         raise Http404("Product_not_found")
