@@ -1,30 +1,62 @@
 {% extends 'master/base.html' %}
 {% load static %}
 {% block content %}
-<h2 class="mb-4">All Blogs</h2>
-<div class="list-group">
-  {% for blog in blogs %}
-    <a href="{% url 'blog_detail' blog.pk %}" class="list-group-item list-group-item-action">
-      {{ blog.title }}
-    </a>
-    {% if blog.blog_image %}
-        <a href="{% url 'blog_detail' blog.pk %}">
-          <img 
-            src="{{ blog.blog_image.url }}"
-            class="card-img-top"
-            alt="{{ blog.title }}"
-          />
-        </a>
-        {% else %}
-        <img 
-          src="{% static 'images/default.jpg' %}"
-          class="card-img-top"
-          alt="No image available"
-        />
-        {% endif %}
-    <a href="{% url 'blog_detail' blog.pk %}" class="list-group-item list-group-item-action">
-      {{ blog.title }}
-    </a>
-  {% endfor %}
+<div class="container blog-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      <h2 class="mb-4 text-center">All Blogs</h2>
+      
+      <div class="list-group">
+        {% for blog in blogs %}
+          <!-- Blog Item Container -->
+          <div class="list-group-item p-0 border-0 mb-4">
+            <!-- Blog Image -->
+            {% if blog.blog_image %}
+              <a href="{% url 'blog_detail' blog.pk %}" class="d-block">
+                <img
+                  src="{{ blog.blog_image.url }}"
+                  class="card-img-top w-100"
+                  alt="{{ blog.title }}"
+                  loading="lazy"
+                />
+              </a>
+            {% else %}
+              <a href="{% url 'blog_detail' blog.pk %}" class="d-block">
+                <img
+                  src="{% static 'images/default.jpg' %}"
+                  class="card-img-top w-100"
+                  alt="No image available"
+                  loading="lazy"
+                />
+              </a>
+            {% endif %}
+            
+            <!-- Blog Title -->
+            <div class="p-3">
+              <a href="{% url 'blog_detail' blog.pk %}" class="blog-title-link text-decoration-none">
+                <h5 class="mb-2 fw-bold">{{ blog.title }}</h5>
+              </a>
+              
+              <!-- Optional: Blog meta info (uncomment if you have these fields) -->
+              <!--
+              <div class="blog-meta d-flex align-items-center text-muted small">
+                <i class="fas fa-calendar-alt me-2"></i>
+                <span class="me-3">{{ blog.created_date|date:"M d, Y" }}</span>
+                <i class="fas fa-user me-2"></i>
+                <span>{{ blog.author.username }}</span>
+              </div>
+              -->
+            </div>
+          </div>
+        {% empty %}
+          <div class="text-center py-5">
+            <i class="fas fa-blog fa-3x text-muted mb-3"></i>
+            <h4 class="text-muted">No blogs available</h4>
+            <p class="text-muted">Check back later for new content!</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

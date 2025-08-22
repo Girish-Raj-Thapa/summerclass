@@ -17,6 +17,14 @@ from carts.views import _cart_id
 from django.contrib.auth import update_session_auth_hash
 # from message.models import Message
 
+# Email verification
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage
+
 # Create your views here.
 
 def user_register(request):
@@ -44,8 +52,30 @@ def user_register(request):
             user.is_active = False
             user.save()
 
-            messages.success(request, "Registration Successful\nAsk admin to activate your account")
-            return redirect('home')
+            # User Activation
+            current_site = get_current_site(request)
+            mail_subject = 'Please Activate your account'
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            message = render_to_string('accounts/verification/account_verification.html', {
+                'user': user,
+                'domain': current_site,
+                # Encoding user id with url safe base 64 encode so noone can see the pk
+                'uid': uid,
+                # Creates token for this user, later we check token upon verification
+                'token': token
+            })
+            to_email = email
+            try:
+                send_email = EmailMessage(
+                    mail_subject, message, to=[to_email]
+                )
+                send_email.send()
+                messages.success(request, "Account created. Check your email to activate your account.")
+            except Exception:
+                messages.warning(request, "Account created, but we couldn't send the email. Ask admin to activate you.")
+            
+            return redirect("/accounts/login/?command=verification&email="+email)
     else:
         form = RegistrationForm()
 
@@ -54,6 +84,26 @@ def user_register(request):
     }
 
     return render(request, 'accounts/register.html', context)
+
+
+def account_activate(request, uidb64, token):
+    try:
+        # Decodes the uidb and stores in uid, gives pk of user
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = Account._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, Account.DoesNotExist):
+        user = None
+    
+    # Checks the token
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, "Congratulations! Your  account is activated.")
+        return redirect('user_login')
+    else:
+        messages.error(request, "Invalid Activation Link")
+        return redirect('user_register')
+
 
 
 def user_login(request):

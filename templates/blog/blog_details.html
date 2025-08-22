@@ -1,26 +1,124 @@
 {% extends 'master/base.html' %}
 {% load static %}
 {% block content %}
-<div class="card">
-  <div class="card-body">
-    <h2>{{ blog.title }}</h2>
-    {% if blog.blog_image %}
-        <a href="{% url 'blog_detail' blog.pk %}">
-          <img 
-            src="{{ blog.blog_image.url }}"
-            class="card-img-top"
-            alt="{{ blog.title }}"
-          />
-        </a>
-        {% else %}
-        <img 
-          src="{% static 'images/default.jpg' %}"
-          class="card-img-top"
-          alt="No image available"
-        />
-        {% endif %}
-    <p>{{ blog.content }}</p>
-    <a href="{% url 'blogs' %}" class="btn btn-secondary mt-3">← Back to Blogs</a>
+<div class="container blog-detail-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      
+      <div class="card">
+        <div class="card-body">
+          <!-- Blog Title -->
+          <h2 class="mb-4">{{ blog.title }}</h2>
+          
+          <!-- Optional: Blog Meta Information -->
+          <!--
+          <div class="blog-meta">
+            <div class="meta-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>{{ blog.created_date|date:"F d, Y" }}</span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-user"></i>
+              <span>{{ blog.author.username }}</span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-clock"></i>
+              <span>{{ blog.read_time|default:"5" }} min read</span>
+            </div>
+          </div>
+          -->
+          
+          <!-- Blog Image -->
+          {% if blog.blog_image %}
+            <div class="text-center">
+              <img
+                src="{{ blog.blog_image.url }}"
+                class="card-img-top"
+                alt="{{ blog.title }}"
+                loading="lazy"
+              />
+            </div>
+          {% else %}
+            <div class="text-center">
+              <img
+                src="{% static 'images/default.jpg' %}"
+                class="card-img-top"
+                alt="No image available"
+                loading="lazy"
+              />
+            </div>
+          {% endif %}
+          
+          <!-- Blog Content -->
+          <div class="blog-content">
+            {{ blog.content|linebreaks }}
+          </div>
+          
+          <!-- Back Button -->
+          <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+            <a href="{% url 'blogs' %}" class="btn btn-secondary">
+              <i class="fas fa-arrow-left me-2"></i>
+              Back to Blogs
+            </a>
+            
+            <!-- Optional: Share buttons or additional actions -->
+            <!--
+            <div class="blog-actions">
+              <button class="btn btn-outline-primary btn-sm me-2" onclick="shareArticle()">
+                <i class="fas fa-share-alt me-1"></i>
+                Share
+              </button>
+              <button class="btn btn-outline-success btn-sm" onclick="window.print()">
+                <i class="fas fa-print me-1"></i>
+                Print
+              </button>
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+      
+    </div>
   </div>
 </div>
+
+<!-- Optional: Reading Progress Bar -->
+<!--
+<div class="reading-progress" id="reading-progress"></div>
+
+<script>
+// Reading progress bar
+window.addEventListener('scroll', function() {
+  const article = document.querySelector('.blog-content');
+  const progress = document.getElementById('reading-progress');
+  
+  if (article && progress) {
+    const articleTop = article.offsetTop;
+    const articleHeight = article.offsetHeight;
+    const scrollTop = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    
+    const scrolled = (scrollTop - articleTop + windowHeight/2) / articleHeight;
+    const percentage = Math.min(Math.max(scrolled, 0), 1) * 100;
+    
+    progress.style.width = percentage + '%';
+  }
+});
+
+// Share function
+function shareArticle() {
+  if (navigator.share) {
+    navigator.share({
+      title: '{{ blog.title|escapejs }}',
+      url: window.location.href
+    });
+  } else {
+    // Fallback: copy to clipboard
+    navigator.clipboard.writeText(window.location.href);
+    alert('Link copied to clipboard!');
+  }
+}
+</script>
+-->
+
 {% endblock %}

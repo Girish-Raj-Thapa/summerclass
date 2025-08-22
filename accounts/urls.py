@@ -7,6 +7,8 @@ urlpatterns = [
     path('login/', views.user_login, name='user_login'), # Login Page
     path('logout/', views.user_logout, name='user_logout'), 
 
+    path('activate/<uidb64>/<token>/', views.account_activate, name="account_activate"), # Account activation
+
     path('dashboard/', views.user_dashboard, name='user_dashboard'), # Dashboard Page
     path('edit-profile/', views.edit_profile, name='edit_profile'), #Edit Profile
 

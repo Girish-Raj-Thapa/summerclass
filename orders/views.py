@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
 # Create your views here.
-# sitesetting app
+# view for orders

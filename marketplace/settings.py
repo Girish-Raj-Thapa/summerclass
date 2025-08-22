@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'sitesetting.apps.SitesettingConfig', # Site Setting app
     'carts.apps.CartsConfig', # Cart App
     'banners.apps.BannersConfig', # Banner App
-    'accounts.apps.AccountsConfig',
+    'accounts.apps.AccountsConfig', # Accounts App
+    'orders.apps.OrdersConfig', # Orders App
 ]
 
 MIDDLEWARE = [
@@ -177,3 +178,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CSRF_TRUSTED_ORIGINS = [
     'https://summerclass-sppv.onrender.com',
 ]
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'secondary',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger', # maps "error" -> Bootstrap red
+}
+
+
+# SMTP configuration
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'girishthapa367@gmail.com'
+EMAIL_HOST_PASSWORD = 'kvyj ycks pmnw avec'
+EMAIL_USE_TLS = True

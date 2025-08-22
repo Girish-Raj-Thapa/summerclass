@@ -21,7 +21,7 @@
             <div class="carousel-inner">
                 {% for banner in banners %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <a href="{{ banner.link|default:'#' }}" class="homepage-banner-link">
+                    <a href="{{ banner.url|default:'#' }}" class="homepage-banner-link">
                         <img src="{{ banner.banner_image.url }}"
                              class="d-block w-100 homepage-banner-image"
                              alt="{{ banner.title|default:'Banner' }}">

@@ -1,13 +1,13 @@
- {% if product.stock <= 0 %}
+{% if product.stock <= 0 %}
   <!-- Out of Stock -->
   <button class="btn btn-danger" disabled>Out of Stock</button>
 
   {% if user.is_authenticated %}
     {% if product.is_approved and product.status and product.owner != user %}
       <!-- Request button + modal include -->
-      <button class="btn btn-primary" data-toggle="modal" data-target="#requestModal">
+      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#requestModal">
         Request Product
-      </button>
+      </a>
       {% include 'store/includes/request_modal.html' %}
     {% elif product.owner == user %}
       <small class="text-muted d-block mt-2">You own this product.</small>
@@ -23,9 +23,7 @@
     <!-- Low Stock -->
     <p class="text-warning">Only {{ product.stock }} left in stock!</p>
     {% if product.owner == user %}
-      <button class="btn btn-secondary" disabled>
-        You own this product
-      </button>
+      <button class="btn btn-secondary" disabled>You own this product</button>
     {% else %}
       {% if in_cart %}
         <div class="d-flex gap-2">
@@ -37,17 +35,15 @@
           </a>
         </div>
       {% else %}
-        <button type="submit" class="btn btn-primary">
+        <a href="{% url 'add_cart' product.id %}" class="btn btn-primary">
           <span class="text">Add to Cart</span> <i class="fas fa-shopping-cart"></i>
-        </button>
+        </a>
       {% endif %}
     {% endif %}
   {% else %}
     <!-- Stock > 5 -->
     {% if user.is_authenticated and product.owner_id == user.id %}
-      <button class="btn btn-secondary" disabled>
-        You own this product
-      </button>
+      <button class="btn btn-secondary" disabled>You own this product</button>
     {% else %}
       {% if in_cart %}
         <div class="d-flex gap-2">
