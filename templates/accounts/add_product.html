@@ -1,4 +1,17 @@
-{% extends 'master/base.html' %} {% load static %} {% block content %}
+{% extends 'master/base.html' %} 
+{% load static %} 
+{% block content %}
+<!-- ========================= ALERT MESSAGES ========================= -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<!-- ========================= ALERT MESSAGES END ========================= -->
 <section class="section-conten padding-y bg">
   <div class="container">
     <div class="row">

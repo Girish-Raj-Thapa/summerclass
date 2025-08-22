@@ -36,23 +36,27 @@ def store(request, category_slug=None):
 
     return render(request, 'products/products.html', context)
 
-
 def product_detail(request, category_slug, product_slug):
     try:
         product = Product.objects.get(category__slug=category_slug, slug=product_slug)
 
+        # Only approved products visible unless owner or staff
         if not product.is_approved and not (request.user.is_staff or request.user == getattr(product, 'owner', None)):
             raise Http404("Product not found")
-        
-        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=product).exists()
+
+        # Check if product is already in cart
+        if request.user.is_authenticated:
+            in_cart = CartItem.objects.filter(user=request.user, product=product).exists()
+        else:
+            in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=product).exists()
+
     except Product.DoesNotExist:
-        raise Http404("Product_not_found")
-    
+        raise Http404("Product not found")
+
     context = {
         'product': product,
         'in_cart': in_cart,
     }
-
     return render(request, 'products/details.html', context)
 
 
