@@ -142,3 +142,74 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+// Add loading animation to payment button
+document.addEventListener('DOMContentLoaded', function() {
+  const paymentButton = document.querySelector('.payment-page .btn-primary');
+  
+  if (paymentButton) {
+    paymentButton.addEventListener('click', function() {
+      this.classList.add('loading');
+      this.innerHTML = 'Processing Payment...';
+    });
+  }
+  
+  // Add success animation to cards on load
+  const cards = document.querySelectorAll('.payment-page .card');
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add('success-pulse');
+    }, index * 100);
+  });
+});
+
+
+// Add loading animation to payment button
+document.addEventListener('DOMContentLoaded', function() {
+  const paymentButton = document.querySelector('.payment-page .btn-primary');
+  const paymentSelect = document.getElementById('paymentMethod');
+  
+  if (paymentButton) {
+    paymentButton.addEventListener('click', function(e) {
+      if (paymentSelect.value === '') {
+        e.preventDefault();
+        alert('Please select a payment method first!');
+        paymentSelect.focus();
+        return;
+      }
+      this.classList.add('loading');
+      this.innerHTML = 'Processing Payment...';
+    });
+  }
+  
+  // Add success animation to cards on load
+  const cards = document.querySelectorAll('.payment-page .card');
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add('success-pulse');
+    }, index * 100);
+  });
+  
+  // Update button text based on selected payment method
+  if (paymentSelect) {
+    paymentSelect.addEventListener('change', function() {
+      if (paymentButton) {
+        switch(this.value) {
+          case 'esewa':
+            paymentButton.innerHTML = 'Pay With eSewa';
+            break;
+          case 'qr':
+            paymentButton.innerHTML = 'Pay With QR Code';
+            break;
+          case 'cod':
+            paymentButton.innerHTML = 'Confirm Cash on Delivery';
+            break;
+          default:
+            paymentButton.innerHTML = 'Select Payment Method';
+        }
+      }
+    });
+  }
+});
+

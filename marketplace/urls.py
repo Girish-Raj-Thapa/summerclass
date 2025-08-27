@@ -30,7 +30,7 @@ urlpatterns = [
     path('cart/', include('carts.urls')), # Cart
 
     # Orders
-    path('order-complete/', views.order_complete, name='order_complete'),
+    path('order/', include('orders.urls')),
 
 
     path('store/', include('products.urls')), # Products

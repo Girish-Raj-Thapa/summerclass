@@ -283,8 +283,3 @@ def checkout(request, total=0, quantity=0, cart_items = None):
         'grand_total': grand_total
     }
     return render(request, 'cart/checkout.html', context)
-
-
-
-def place_order(request):
-    return render(request, 'cart/place_order.html')

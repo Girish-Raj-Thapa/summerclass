@@ -6142,3 +6142,1943 @@ padding: 6px 10px !important;
   }
 }
 
+/* ===================Payment Page Specific Style =========================*/
+.payment-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.payment-page .section-content {
+  padding: 2rem 0;
+}
+
+.payment-page .bg {
+  background: transparent;
+}
+
+/* Page Title */
+.payment-page h4.text-center {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #d67e2e, #b8661f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.payment-page h4.text-center::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, #d67e2e, #b8661f);
+  border-radius: 2px;
+}
+
+/* Card Styles */
+.payment-page .card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.payment-page .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.payment-page .card-header {
+  background: linear-gradient(135deg, #d67e2e 0%, #b8661f 100%);
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.payment-page .card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.payment-page .card-body {
+  padding: 1.5rem;
+}
+
+/* Billing Address Card */
+.payment-page .card:first-child .card-body .address-item {
+  display: flex;
+  margin-bottom: 0.6rem !important;
+  padding: 0.5rem 0.8rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  border-left: 3px solid #f4c2a1;
+  transition: all 0.3s ease;
+  align-items: center;
+}
+
+.payment-page .card:first-child .card-body .address-item:hover {
+  background: #f4c2a1;
+  border-left-color: #d67e2e;
+  transform: translateX(3px);
+  box-shadow: 0 3px 12px rgba(214, 126, 46, 0.15);
+}
+
+.payment-page .card:first-child .card-body .address-label {
+  font-weight: 600;
+  color: #d67e2e;
+  min-width: 80px;
+  margin-right: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.payment-page .card:first-child .card-body .address-value {
+  color: #333;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.payment-page .card:first-child .card-body .order-note {
+  background: linear-gradient(135deg, #fff9f3, #f4c2a1);
+  padding: 0.8rem;
+  border-radius: 10px;
+  border-left: 3px solid #d67e2e;
+  margin-top: 0.8rem;
+}
+
+.payment-page .card:first-child .card-body .order-note b {
+  color: #d67e2e;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+/* Payment Methods Card - Dropdown Style */
+.payment-page .payment-methods-dropdown {
+  position: relative;
+}
+
+.payment-page .payment-method-select {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #f4c2a1;
+  border-radius: 12px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d67e2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 18px;
+}
+
+.payment-page .payment-method-select:focus {
+  outline: none;
+  border-color: #d67e2e;
+  box-shadow: 0 0 0 3px rgba(214, 126, 46, 0.2);
+}
+
+.payment-page .payment-method-select:hover {
+  border-color: #d67e2e;
+  background-color: #f4c2a1;
+}
+
+.payment-page .payment-method-select option {
+  padding: 0.8rem;
+  background: white;
+  color: #333;
+}
+
+/* Product Review Table */
+.payment-page .table {
+  margin-bottom: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.payment-page .table thead th {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #495057;
+  font-weight: 600;
+  border: none;
+  padding: 1rem 0.8rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.payment-page .table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.payment-page .table tbody tr:hover {
+  background: rgba(214, 126, 46, 0.03);
+  transform: translateX(3px);
+}
+
+.payment-page .table tbody td {
+  padding: 0.8rem 0.4rem;
+  border: none;
+  vertical-align: middle;
+}
+
+.payment-page .table tbody td:first-child {
+  padding-right: 0.4rem;
+}
+
+.payment-page .table tbody td:nth-child(2) {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+
+/* Product Image */
+.payment-page .itemside .img-sm {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-page .itemside .img-sm:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.payment-page .itemside .title {
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.payment-page .itemside .title:hover {
+  color: #d67e2e;
+  transform: translateX(3px);
+}
+
+.payment-page .text-danger {
+  background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+  color: #dc3545;
+  padding: 0.25rem 0.6rem;
+  border-radius: 10px;
+  font-weight: 500;
+  border-left: 2px solid #dc3545;
+}
+
+.payment-page .text-warning {
+  background: linear-gradient(135deg, #fffbf0, #fff3cd);
+  color: #856404;
+  padding: 0.25rem 0.6rem;
+  border-radius: 10px;
+  font-weight: 500;
+  border-left: 2px solid #ffc107;
+}
+
+/* Quantity Label */
+.payment-page td label {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-weight: 600;
+  color: #495057;
+  border: 2px solid #dee2e6;
+  font-size: 0.85rem;
+}
+
+/* Price Information */
+.payment-page .price-wrap .price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #d67e2e;
+  font-style: normal;
+}
+
+.payment-page .price-wrap .text-muted {
+  color: #6c757d !important;
+  font-size: 0.75rem;
+  background: rgba(108, 117, 125, 0.1);
+  padding: 0.15rem 0.3rem;
+  border-radius: 6px;
+  margin-top: 0.15rem;
+  display: inline-block;
+}
+
+/* Sidebar Card */
+.payment-page aside .card {
+  position: sticky;
+  top: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid rgba(214, 126, 46, 0.1);
+}
+
+.payment-page aside .card-body {
+  padding: 2rem 1.5rem;
+}
+
+.payment-page .dlist-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.payment-page .dlist-align dt {
+  font-weight: 500;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.payment-page .dlist-align dd {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.payment-page .dlist-align:last-of-type {
+  border-bottom: 2px solid #d67e2e;
+  padding-bottom: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.payment-page .dlist-align:last-of-type dd {
+  font-size: 1.3rem;
+  color: #d67e2e;
+}
+
+/* Payment Methods Image */
+.payment-page .text-center img {
+  filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.payment-page .text-center img:hover {
+  transform: scale(1.03);
+}
+
+/* Pay Button */
+.payment-page .btn-primary {
+  background: linear-gradient(135deg, #d67e2e 0%, #b8661f 100%);
+  border: none;
+  border-radius: 20px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(214, 126, 46, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-page .btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.payment-page .btn-primary:hover::before {
+  left: 100%;
+}
+
+.payment-page .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(214, 126, 46, 0.4);
+  background: linear-gradient(135deg, #b8661f 0%, #d67e2e 100%);
+}
+
+.payment-page .btn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+  .payment-page aside .card {
+    position: static;
+    margin-top: 1.5rem;
+  }
+  
+  .payment-page h4.text-center {
+    font-size: 1.8rem;
+  }
+  
+  .payment-page .card-body {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .payment-page .section-content {
+    padding: 1.5rem 0;
+  }
+  
+  .payment-page h4.text-center {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .payment-page .card-body {
+    padding: 1rem;
+  }
+  
+  .payment-page .table tbody td {
+    padding: 0.8rem 0.4rem;
+  }
+  
+  .payment-page .itemside {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .payment-page .itemside .aside {
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* Loading Animation */
+.payment-page .btn-primary.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.payment-page .btn-primary.loading::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success Animation */
+.payment-page .success-pulse {
+  animation: successPulse 0.6s ease-in-out;
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* =====================Payment Success Page Styles ==============*/
+.payment-success-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  min-height: 100vh;
+  font-family: "Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 2rem 0;
+}
+
+/* Success Header Section */
+.success-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1.5rem;
+  margin: 0 auto 2rem auto;  /* center horizontally */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  max-width: 800px;
+}
+
+.success-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #28a745, #20c997, #17a2b8);
+  border-radius: 20px 20px 0 0;
+}
+
+.success-icon {
+  font-size: 3rem;
+  color: #28a745;
+  margin-bottom: 1rem;
+  animation: successPulse 2s ease-in-out infinite;
+  text-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.success-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shop-more-btn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.shop-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+  background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+  color: white;
+}
+
+/* Invoice Container */
+.invoice-container {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.invoice-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #6c757d, #495057, #343a40);
+}
+
+/* Panel Body */
+.panel-body {
+  padding: 2rem 1.5rem;
+}
+
+/* Invoice Header */
+.invoice-logo img {
+  max-height: 50px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.invoice-logo img:hover {
+  transform: scale(1.05);
+}
+
+.invoice-from {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border-left: 4px solid #6c757d;
+}
+
+.invoice-from ul {
+  margin: 0;
+}
+
+.invoice-from li {
+  color: #495057;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.invoice-from li strong {
+  color: #343a40;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Invoice Details */
+.invoice-details {
+  margin-top: 1.5rem;
+}
+
+.invoice-details .card {
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 5px 20px rgba(52, 58, 64, 0.2);
+}
+
+.invoice-details .card-body {
+  padding: 1.2rem;
+}
+
+.invoice-details ul {
+  margin: 0;
+}
+
+.invoice-details li {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-details li:last-child {
+  border-bottom: none;
+}
+
+.invoice-details strong {
+  color: #ffffff;
+  font-weight: 600;
+  min-width: 140px;
+}
+
+/* Invoice Items Table */
+.invoice-items {
+  margin-top: 1.5rem;
+}
+
+.table-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.table {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 0.8rem;
+}
+
+.table tbody td {
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  vertical-align: middle;
+  color: #495057;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(108, 117, 125, 0.03);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table .text-muted {
+  color: #6c757d !important;
+  font-size: 0.8rem;
+  background: rgba(108, 117, 125, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+/* Table Footer */
+.table tfoot th {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: none;
+  padding: 0.6rem 0.5rem;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.85rem;
+}
+
+.table tfoot tr:last-child th {
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* Invoice Footer */
+.invoice-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  position: relative;
+}
+
+.invoice-footer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, #6c757d, #495057);
+  border-radius: 1px;
+}
+
+.invoice-footer p {
+  font-size: 1rem;
+  color: #6c757d;
+  font-weight: 500;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+  .success-title {
+    font-size: 2rem;
+  }
+  
+  .panel-body {
+    padding: 2rem;
+  }
+  
+  .invoice-from {
+    margin-top: 1rem;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .payment-success-page {
+    padding: 1rem 0;
+  }
+  
+  .success-header {
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .success-title {
+    font-size: 1.8rem;
+  }
+  
+  .success-icon {
+    font-size: 3rem;
+  }
+  
+  .panel-body {
+    padding: 1.5rem;
+  }
+  
+  .invoice-container {
+    margin: 0 1rem;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .table {
+    min-width: 500px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .success-header,
+  .shop-more-btn {
+    display: none !important;
+  }
+  
+  .payment-success-page {
+    background: white;
+  }
+  
+  .invoice-container {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
+
+
+/* ======================Order Detail Page Styles ================================*/
+.order-detail-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  min-height: 100vh;
+  font-family: "Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 2rem 0;
+}
+
+/* Order Detail Container */
+.order-detail-container {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.order-detail-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #6c757d, #495057, #343a40);
+}
+
+/* Panel Body */
+.panel-body {
+  padding: 2rem 1.5rem;
+}
+
+/* Order Detail Header */
+.order-detail-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.order-detail-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #17a2b8, #20c997, #28a745);
+  border-radius: 15px 15px 0 0;
+}
+
+/* Invoice Logo */
+.invoice-logo img {
+  max-height: 50px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.invoice-logo img:hover {
+  transform: scale(1.05);
+}
+
+.invoice-from {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border-left: 4px solid #6c757d;
+}
+
+.invoice-from ul {
+  margin: 0;
+}
+
+.invoice-from li {
+  color: #495057;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.invoice-from li strong {
+  color: #343a40;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Invoice Details */
+.invoice-details {
+  margin-top: 1.5rem;
+}
+
+.invoice-details .well {
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 5px 20px rgba(52, 58, 64, 0.2);
+  padding: 1.2rem;
+}
+
+.invoice-details ul {
+  margin: 0;
+}
+
+.invoice-details li {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-details li:last-child {
+  border-bottom: none;
+}
+
+.invoice-details strong {
+  color: #ffffff;
+  font-weight: 600;
+  min-width: 140px;
+}
+
+/* Invoice Items Table */
+.invoice-items {
+  margin-top: 1.5rem;
+}
+
+.table-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.table {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 0.8rem;
+}
+
+.table tbody td {
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  vertical-align: middle;
+  color: #495057;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(108, 117, 125, 0.03);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table .text-muted {
+  color: #6c757d !important;
+  font-size: 0.8rem;
+  background: rgba(108, 117, 125, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+/* Table Footer */
+.table tfoot th {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: none;
+  padding: 0.6rem 0.5rem;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.85rem;
+}
+
+.table tfoot tr:last-child th {
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* Invoice Footer */
+.invoice-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  position: relative;
+}
+
+.invoice-footer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, #6c757d, #495057);
+  border-radius: 1px;
+}
+
+.invoice-footer p {
+  font-size: 1rem;
+  color: #6c757d;
+  font-weight: 500;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Bootstrap 5 Utility Classes */
+.mb0 {
+  margin-bottom: 0 !important;
+}
+
+.mt25 {
+  margin-top: 1.5rem !important;
+}
+
+.p30 {
+  padding: 1.5rem !important;
+}
+
+.per70 {
+  width: 70% !important;
+}
+
+.per5 {
+  width: 5% !important;
+}
+
+.per25 {
+  width: 25% !important;
+}
+
+/* Status Badge Styling */
+.status-badge {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* Quantity Badge */
+.qty-badge {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+  .panel-body {
+    padding: 2rem;
+  }
+  
+  .invoice-from {
+    margin-top: 1rem;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .order-detail-page {
+    padding: 1rem 0;
+  }
+  
+  .order-detail-header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .panel-body {
+    padding: 1.5rem;
+  }
+  
+  .order-detail-container {
+    margin: 0 1rem;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .table {
+    min-width: 500px;
+  }
+  
+  .invoice-details li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+  
+  .invoice-details strong {
+    min-width: auto;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .order-detail-page {
+    background: white;
+  }
+  
+  .order-detail-container {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .order-detail-header {
+    box-shadow: none;
+  }
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.order-detail-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.order-detail-header {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* ==================== MY ORDERS PAGE - UNIQUE STYLES ======================= */
+
+/* Wrap all styles with a unique page identifier to prevent conflicts */
+.my-orders-page .my-orders-card {
+  background: white !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden;
+}
+
+.my-orders-page .my-orders-card .card-header {
+  background: white !important;
+  color: #333333 !important;
+  padding: 20px 25px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* Order Stats - Scoped to My Orders page */
+.my-orders-page .order-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.my-orders-page .stat-item {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.my-orders-page .stat-item strong {
+  margin-left: 5px;
+  color: #333;
+}
+
+/* Header Icon - Scoped */
+.my-orders-page .my-orders-card .card-header i {
+  color: #007bff;
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+/* Orders Table - Scoped */
+.my-orders-page .orders-table {
+  background: white !important;
+}
+
+.my-orders-page .orders-table thead th {
+  background: #f8f9fa !important;
+  color: #495057 !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 15px !important;
+  border-bottom: 2px solid #dee2e6 !important;
+  border-top: none !important;
+}
+
+.my-orders-page .orders-table tbody td {
+  padding: 15px !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.my-orders-page .orders-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.my-orders-page .orders-table tbody tr:hover {
+  background: #f8f9fa !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Order Number - Scoped */
+.my-orders-page .order-number {
+  display: flex;
+  align-items: center;
+  min-width: 160px;
+}
+
+.my-orders-page .order-number i {
+  color: #007bff;
+  font-size: 0.9rem;
+}
+
+.my-orders-page .order-link {
+  color: #007bff !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.my-orders-page .order-link:hover {
+  color: #0056b3 !important;
+  text-decoration: underline !important;
+}
+
+/* Customer Info - Scoped */
+.my-orders-page .customer-info {
+  min-width: 150px;
+}
+
+.my-orders-page .customer-name {
+  font-weight: 600 !important;
+  color: #333 !important;
+  font-size: 0.95rem;
+}
+
+/* Date Cell - Scoped */
+.my-orders-page .date-cell {
+  min-width: 120px;
+}
+
+.my-orders-page .order-date {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.my-orders-page .order-date i {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.my-orders-page .order-time {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-left: 18px;
+}
+
+/* Table Cells - Scoped */
+.my-orders-page .price-cell {
+  font-weight: 600;
+  color: #28a745;
+  font-size: 0.95rem;
+}
+
+/* Status Badges - Scoped to avoid conflicts */
+.my-orders-page .orders-table .badge {
+  font-size: 0.75rem !important;
+  padding: 6px 12px !important;
+  border-radius: 12px !important;
+  font-weight: 500 !important;
+}
+
+.my-orders-page .status-completed {
+  background: #d1f2eb !important;
+  color: #0c5460 !important;
+  border: 1px solid #b6e3d4;
+}
+
+.my-orders-page .status-processing {
+  background: #fff3cd !important;
+  color: #856404 !important;
+  border: 1px solid #ffeaa7;
+}
+
+.my-orders-page .status-shipped {
+  background: #cce5ff !important;
+  color: #004085 !important;
+  border: 1px solid #99ccff;
+}
+
+.my-orders-page .status-pending {
+  background: #f8f9fa !important;
+  color: #6c757d !important;
+  border: 1px solid #dee2e6;
+}
+
+/* Action Buttons - Scoped */
+.my-orders-page .action-buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.my-orders-page .btn-view {
+  background: #007bff !important;
+  border: 1px solid #007bff !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+  transition: all 0.2s ease !important;
+}
+
+.my-orders-page .btn-view:hover {
+  background: #0056b3 !important;
+  border-color: #004085 !important;
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+/* Empty State - Scoped */
+.my-orders-page .empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.my-orders-page .empty-icon {
+  font-size: 4rem;
+  color: #dee2e6;
+  margin-bottom: 20px;
+}
+
+.my-orders-page .empty-message {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #6c757d;
+}
+
+.my-orders-page .btn-primary-custom {
+  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 25px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3) !important;
+}
+
+.my-orders-page .btn-primary-custom:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4) !important;
+  background: linear-gradient(135deg, #0056b3, #004085) !important;
+  color: white !important;
+}
+
+/* Responsive Design - All scoped to my-orders-page */
+@media (max-width: 991.98px) {
+  .my-orders-page .my-orders-card .card-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .my-orders-page .order-stats {
+    margin-top: 15px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .my-orders-page .orders-table thead {
+    display: none;
+  }
+
+  .my-orders-page .orders-table,
+  .my-orders-page .orders-table tbody,
+  .my-orders-page .orders-table tr,
+  .my-orders-page .orders-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .my-orders-page .orders-table tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .my-orders-page .orders-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0 !important;
+    border: none !important;
+    position: relative;
+  }
+
+  .my-orders-page .orders-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+    flex: 0 0 100px;
+  }
+
+  /* Add data labels for mobile */
+  .my-orders-page .orders-table tbody td:nth-child(1)::before {
+    content: "Order No: ";
+  }
+  
+  .my-orders-page .orders-table tbody td:nth-child(2)::before {
+    content: "Name: ";
+  }
+  
+  .my-orders-page .orders-table tbody td:nth-child(3)::before {
+    content: "Total: ";
+  }
+  
+  .my-orders-page .orders-table tbody td:nth-child(4)::before {
+    content: "Date: ";
+  }
+  
+  .my-orders-page .orders-table tbody td:nth-child(5)::before {
+    content: "Status: ";
+  }
+  
+  .my-orders-page .orders-table tbody td:nth-child(6)::before {
+    content: "Actions: ";
+  }
+
+  .my-orders-page .order-number,
+  .my-orders-page .customer-info,
+  .my-orders-page .date-cell {
+    min-width: auto;
+    flex: 1;
+    text-align: right;
+  }
+
+  .my-orders-page .action-buttons {
+    justify-content: flex-end;
+  }
+
+  .my-orders-page .order-stats {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .my-orders-page .my-orders-card .card-header {
+    padding: 15px 20px !important;
+    font-size: 1rem !important;
+  }
+
+  .my-orders-page .empty-state {
+    padding: 40px 15px;
+  }
+
+  .my-orders-page .empty-icon {
+    font-size: 3rem;
+  }
+
+  .my-orders-page .order-stats {
+    gap: 5px;
+    font-size: 0.75rem;
+  }
+
+  .my-orders-page .orders-table tbody tr {
+    padding: 12px;
+  }
+
+  .my-orders-page .orders-table tbody td::before {
+    flex: 0 0 80px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ==================== MY SALES PAGE - UNIQUE STYLES ======================= */
+
+/* Wrap all styles with a unique page identifier to prevent conflicts */
+.my-sales-page .my-sales-card {
+  background: white !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden;
+}
+
+.my-sales-page .my-sales-card .card-header {
+  background: white !important;
+  color: #333333 !important;
+  padding: 20px 25px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* Sales Stats - Scoped to My Sales page */
+.my-sales-page .sales-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.my-sales-page .stat-item {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.my-sales-page .stat-item strong {
+  margin-left: 5px;
+}
+
+.my-sales-page .sales-stats .text-success {
+  color: #28a745 !important;
+}
+
+.my-sales-page .stat-separator {
+  color: #dee2e6;
+  font-weight: normal;
+}
+
+/* Header Icon - Scoped */
+.my-sales-page .my-sales-card .card-header i {
+  color: #28a745;
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+/* Sales Table - Scoped */
+.my-sales-page .sales-table {
+  background: white !important;
+}
+
+.my-sales-page .sales-table thead th {
+  background: #f8f9fa !important;
+  color: #495057 !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 15px !important;
+  border-bottom: 2px solid #dee2e6 !important;
+  border-top: none !important;
+}
+
+.my-sales-page .sales-table tbody td {
+  padding: 15px !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.my-sales-page .sales-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.my-sales-page .sales-table tbody tr:hover {
+  background: #f8f9fa !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Order Number - Scoped */
+.my-sales-page .order-number {
+  display: flex;
+  align-items: center;
+  min-width: 160px;
+}
+
+.my-sales-page .order-number i {
+  color: #28a745;
+  font-size: 0.9rem;
+}
+
+.my-sales-page .order-link {
+  color: #28a745 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.my-sales-page .order-link:hover {
+  color: #1e7e34 !important;
+  text-decoration: underline !important;
+}
+
+/* Customer Info - Scoped */
+.my-sales-page .customer-info {
+  min-width: 150px;
+}
+
+.my-sales-page .customer-name {
+  font-weight: 600 !important;
+  color: #333 !important;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.my-sales-page .customer-email {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Product Info - Scoped */
+.my-sales-page .product-info {
+  min-width: 200px;
+}
+
+.my-sales-page .product-name {
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 2px;
+  font-size: 0.95rem;
+}
+
+.my-sales-page .product-category {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Quantity Cell - Scoped */
+.my-sales-page .quantity-cell {
+  text-align: center;
+}
+
+.my-sales-page .quantity-badge {
+  background: #e9f7ef;
+  color: #28a745;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 1px solid #b6e3d4;
+}
+
+/* Date Cell - Scoped */
+.my-sales-page .date-cell {
+  min-width: 120px;
+}
+
+.my-sales-page .order-date {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.my-sales-page .order-date i {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.my-sales-page .order-time {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-left: 18px;
+}
+
+/* Price Cell - Scoped */
+.my-sales-page .price-cell {
+  font-weight: 600;
+  color: #28a745;
+  font-size: 0.95rem;
+}
+
+/* Action Buttons - Scoped */
+.my-sales-page .action-buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.my-sales-page .btn-view {
+  background: #28a745 !important;
+  border: 1px solid #28a745 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+  transition: all 0.2s ease !important;
+}
+
+.my-sales-page .btn-view:hover {
+  background: #1e7e34 !important;
+  border-color: #1c7430 !important;
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+/* Empty State - Scoped */
+.my-sales-page .empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.my-sales-page .empty-icon {
+  font-size: 4rem;
+  color: #dee2e6;
+  margin-bottom: 20px;
+}
+
+.my-sales-page .empty-message {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.my-sales-page .empty-submessage {
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  color: #6c757d;
+}
+
+.my-sales-page .btn-primary-custom {
+  background: linear-gradient(135deg, #28a745, #1e7e34) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 25px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
+}
+
+.my-sales-page .btn-primary-custom:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4) !important;
+  background: linear-gradient(135deg, #1e7e34, #155724) !important;
+  color: white !important;
+}
+
+/* Responsive Design - All scoped to my-sales-page */
+@media (max-width: 991.98px) {
+  .my-sales-page .my-sales-card .card-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .my-sales-page .sales-stats {
+    margin-top: 15px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .my-sales-page .sales-table thead {
+    display: none;
+  }
+
+  .my-sales-page .sales-table,
+  .my-sales-page .sales-table tbody,
+  .my-sales-page .sales-table tr,
+  .my-sales-page .sales-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .my-sales-page .sales-table tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .my-sales-page .sales-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0 !important;
+    border: none !important;
+    position: relative;
+  }
+
+  .my-sales-page .sales-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+    flex: 0 0 100px;
+  }
+
+  /* Add data labels for mobile */
+  .my-sales-page .sales-table tbody td:nth-child(1)::before {
+    content: "Order #: ";
+  }
+  
+  .my-sales-page .sales-table tbody td:nth-child(2)::before {
+    content: "Customer: ";
+  }
+  
+  .my-sales-page .sales-table tbody td:nth-child(3)::before {
+    content: "Product: ";
+  }
+  
+  .my-sales-page .sales-table tbody td:nth-child(4)::before {
+    content: "Quantity: ";
+  }
+  
+  .my-sales-page .sales-table tbody td:nth-child(5)::before {
+    content: "Total: ";
+  }
+  
+  .my-sales-page .sales-table tbody td:nth-child(6)::before {
+    content: "Date: ";
+  }
+  
+  .my-sales-page .sales-table tbody td:nth-child(7)::before {
+    content: "Actions: ";
+  }
+
+  .my-sales-page .order-number,
+  .my-sales-page .customer-info,
+  .my-sales-page .product-info,
+  .my-sales-page .date-cell {
+    min-width: auto;
+    flex: 1;
+    text-align: right;
+  }
+
+  .my-sales-page .quantity-cell {
+    text-align: right;
+  }
+
+  .my-sales-page .action-buttons {
+    justify-content: flex-end;
+  }
+
+  .my-sales-page .sales-stats {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .my-sales-page .my-sales-card .card-header {
+    padding: 15px 20px !important;
+    font-size: 1rem !important;
+  }
+
+  .my-sales-page .empty-state {
+    padding: 40px 15px;
+  }
+
+  .my-sales-page .empty-icon {
+    font-size: 3rem;
+  }
+
+  .my-sales-page .sales-stats {
+    gap: 5px;
+    font-size: 0.75rem;
+  }
+
+  .my-sales-page .sales-table tbody tr {
+    padding: 12px;
+  }
+
+  .my-sales-page .sales-table tbody td::before {
+    flex: 0 0 80px;
+    font-size: 0.8rem;
+  }
+
+  .my-sales-page .customer-info,
+  .my-sales-page .product-info {
+    text-align: right;
+  }
+
+  .my-sales-page .customer-email,
+  .my-sales-page .product-category {
+    text-align: right;
+  }
+}

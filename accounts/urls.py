@@ -19,6 +19,8 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change_password'), # Change Password page
 
     path('my-orders/', views.my_orders, name='my_orders'),
+    path('order-detail/<int:order_id>/', views.order_detail, name='order_detail'),
+    path('my-sales/', views.my_sales, name='my_sales'),
     path('my-requests-sent/', views.my_requests_sent, name='my_request_sent'),
     path('my-requests-received/', views.my_requests_received, name='my_requests_received'),
     path('fulfill/<int:pk>/', views.mark_request_fulfilled, name='mark_request_fulfilled'),

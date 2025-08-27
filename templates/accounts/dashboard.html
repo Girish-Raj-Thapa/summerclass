@@ -34,10 +34,9 @@
                       <i class="fa fa-shopping-cart"></i>
                     </div>
                     <h5 class="stat-title">Total Orders</h5>
-                    <h4 class="stat-number">5</h4>
+                    <h4 class="stat-number">{{ order_count }}</h4>
                     <a href="{% url 'my_orders' %}" class="stat-link"
-                      >View Orders</a
-                    >
+                      >View Orders</a>
                   </div>
                 </div>
               </div>
@@ -47,10 +46,10 @@
                     <div class="stat-icon">
                       <i class="fa fa-inbox"></i>
                     </div>
-                    <h5 class="stat-title">Requests Received</h5>
-                    <h4 class="stat-number">10</h4>
-                    <a href="{% url 'my_requests_received' %}" class="stat-link"
-                      >View Requests</a
+                    <h5 class="stat-title">Total Sales</h5>
+                    <h4 class="stat-number">{{ sales_count }}</h4>
+                    <a href="{% url 'my_sales' %}" class="stat-link"
+                      >View Sales</a
                     >
                   </div>
                 </div>

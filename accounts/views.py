@@ -25,6 +25,8 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
+from orders.models import Order, OrderProduct
+
 # Create your views here.
 
 def user_register(request):
@@ -186,6 +188,15 @@ def user_dashboard(request):
     # Products posted by the user
     my_products_qs = Product.objects.filter(owner=user)
 
+    # orders by user which are paid
+    orders = Order.objects.filter(user=request.user, is_ordered=True)
+
+    # Sales made by the user (seller side)
+    sales = OrderProduct.objects.filter(
+        product__owner=request.user,
+        order__is_ordered=True
+    )
+
     context = {
         # Product stats (seller side)
         "my_products_total": my_products_qs.count(),
@@ -194,6 +205,8 @@ def user_dashboard(request):
         "my_products_active": my_products_qs.filter(status=True).count(),
         "my_products_inactive": my_products_qs.filter(status=False).count(),
         'user': user,
+        'order_count': orders.count(),
+        'sales_count': sales.count()
     }
 
     return render(request, 'accounts/dashboard.html', context)
@@ -309,7 +322,60 @@ def add_product(request):
 
 
 def my_orders(request):
-    return render(request, 'orders/my_orders.html')
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    context = {
+        'orders': orders
+    }
+    return render(request, 'accounts/orders/my_orders.html', context)
+
+
+@login_required(login_url='user_login')
+def order_detail(request, order_id):
+    user = request.user
+
+    # buyer's orders
+    buyer_qs = Order.objects.filter(order_number=order_id, user=user)
+
+    # seller's orders (any product they own)
+    seller_qs = Order.objects.filter(
+        order_number=order_id,
+        orderproduct__product__owner=user
+    )
+
+    order = (buyer_qs | seller_qs).distinct().first()
+
+    if not order:
+        return render(request, 'master/404.html', status=404)
+
+    order_detail = OrderProduct.objects.filter(order=order)
+    subtotal = 0 
+
+    for i in order_detail:
+        subtotal += i.product_price * i.quantity
+
+    context = {
+        'order_detail': order_detail,
+        'order': order,
+        'subtotal': subtotal
+    }
+
+    return render(request, 'accounts/orders/order_detail.html', context)
+
+@login_required(login_url='user_login')
+def my_sales(request):
+    data = (
+        OrderProduct.objects
+        .filter(product__owner=request.user, order__is_ordered=True)  # items for my products
+        .select_related('order', 'product', 'user')  # using to speed by joining minimizing extra queries
+        .prefetch_related('variations')  # to show variations
+        .order_by('-created_at')
+    )
+
+    context = {
+        'data': data
+    }
+
+    return render(request, 'accounts/orders/my_sales.html', context)
 
 def my_requests_sent(request):
     return HttpResponse()

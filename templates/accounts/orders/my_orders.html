@@ -1,0 +1,105 @@
+{% extends 'master/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= ALERT MESSAGES ========================= -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<!-- ========================= ALERT MESSAGES END ========================= -->
+
+<section class="section-conten padding-y bg my-orders-page">
+  <div class="container">
+    <div class="row">
+      {% include 'accounts/includes/sidebar.html' %}
+      <main class="col-md-9">
+        <article class="card my-orders-card">
+          <header class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-shopping-bag"></i>
+                <strong>Your Order History</strong>
+              </div>
+              <div class="order-stats">
+                <span class="stat-item">Total Orders: <strong>{{ orders|length }}</strong></span>
+              </div>
+            </div>
+          </header>
+
+          <div class="card-body p-0">
+            {% if orders %}
+            <div class="table-responsive">
+              <table class="table table-hover mb-0 orders-table">
+                <thead>
+                  <tr>
+                    <th>Order No</th>
+                    <th>Name</th>
+                    <th>Order Total</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in orders %}
+                  <tr>
+                    <td>
+                      <div class="order-number">
+                        <i class="fas fa-receipt me-2"></i>
+                        <a href="{% url 'order_detail' order.order_number %}" class="order-link">
+                          {{ order.order_number }}
+                        </a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="customer-info">
+                        <div class="customer-name">{{ order.full_name }}</div>
+                      </div>
+                    </td>
+                    <td class="price-cell">Rs. {{ order.order_total }}</td>
+                    <td class="date-cell">
+                      <div class="order-date">
+                        <i class="fas fa-calendar-alt me-1"></i>
+                        {{ order.created_at|date:"M d, Y" }}
+                      </div>
+                      <div class="order-time">
+                        {{ order.created_at|date:"h:i A" }}
+                      </div>
+                    </td>
+                    <td>
+                      {% if order.status == 'Accepted' %}
+                        <span class="badge status-completed">Completed</span>
+                      {% elif order.status == 'Shipped' %}
+                        <span class="badge status-shipped">Shipped</span>
+                      {% else %}
+                        <span class="badge status-pending">Pending</span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            {% else %}
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-shopping-bag"></i></div>
+              <p class="empty-message">You haven't placed any orders yet.</p>
+              <a href="{% url 'store' %}" class="btn btn-primary-custom">
+                <i class="fas fa-shopping-cart me-2"></i>Start Shopping
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

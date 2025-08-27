@@ -196,3 +196,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'girishthapa367@gmail.com'
 EMAIL_HOST_PASSWORD = 'kvyj ycks pmnw avec'
 EMAIL_USE_TLS = True
+
+
+# For ESewa
+ESEWA_PRODUCT_CODE = "EPAYTEST"
+ESEWA_SECRET_KEY = "8gBm/:&EnhH.1/q"
+ESEWA_FORM_URL = "https://rc-epay.esewa.com.np/api/epay/main/v2/form"
